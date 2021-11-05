@@ -2,6 +2,8 @@ package backend.factories;
 
 import java.util.Optional;
 
+import backend.nutzer.Nutzer;
+import backend.speicher.DataSet;
 import backend.speicher.ElementFactory;
 
 
@@ -20,9 +22,8 @@ public class NutzerFactory implements ElementFactory {
 		index = Integer.parseInt(id);
 
 	}
-
 	@Override
-	public Object create(Object[] params, Optional<String> optId) {
+	public Object create(DataSet dataSet, Optional<String> optId) {
 		String newIndex = "0";
 		if(optId.isPresent()) {
 			newIndex = optId.get();
@@ -33,7 +34,11 @@ public class NutzerFactory implements ElementFactory {
 			newIndex = index+"";
 			index++;
 		}
-		Nutzer ret = new Nutzer((String) params[0],(String) params[1],newIndex);
+		
+		Nutzer ret= new Nutzer((String) dataSet.get("vorname"),
+							(String) dataSet.get("nachname"), 
+							(Integer) dataSet.get("icon"),
+							newIndex);
 		return ret;
 	}
 

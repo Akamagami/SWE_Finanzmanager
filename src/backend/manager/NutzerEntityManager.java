@@ -6,15 +6,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import backend.benutzer.Benutzer;
-import backend.datenbasis.EntityManager;
+import backend.nutzer.Nutzer;
+import backend.speicher.EntityManager;
 
-public class BenutzerManager implements EntityManager<Benutzer> {
 
-	private HashMap<String,Benutzer> list = new HashMap<String,Benutzer>();
+
+
+public class NutzerEntityManager implements EntityManager<Nutzer> {
+
+	private HashMap<String,Nutzer> list = new HashMap<String,Nutzer>();
 	
 	@Override
-	public Optional<Benutzer> get(String id) {
+	public Optional<Nutzer> get(String id) {
 		return Optional.of(list.get(id));
 	}
 
@@ -25,15 +28,15 @@ public class BenutzerManager implements EntityManager<Benutzer> {
 	}
 
 	@Override
-	public void save(Benutzer e) {
+	public void save(Nutzer e) {
 		list.put(e.getId(), e);
 		
 	}
 
 	@Override
-	public List<Benutzer> getAll() {
-		List<Benutzer> ret = new ArrayList<Benutzer>();
-			for(Map.Entry<String, Benutzer> entry : list.entrySet()) {
+	public List<Nutzer> getAll() {
+		List<Nutzer> ret = new ArrayList<Nutzer>();
+			for(Map.Entry<String, Nutzer> entry : list.entrySet()) {
 				ret.add(entry.getValue());
 			}
 		return ret;

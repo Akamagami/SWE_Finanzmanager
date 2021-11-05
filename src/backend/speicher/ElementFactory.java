@@ -11,6 +11,6 @@ public interface ElementFactory {
 	
 	public void setIndex(String id);
 	
-	public Object create(Object[] params,Optional<String> optId);
+	public Object create(DataSet dataSet,Optional<String> optId);
 		
 }
