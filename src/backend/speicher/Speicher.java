@@ -1,5 +1,16 @@
 package backend.speicher;
 
-public class Speicher {
+import backend.speicher.manager.EntityManagerList;
 
+public class Speicher {
+	
+	EntityManagerList emList = new EntityManagerList();
+
+	public Speicher() {
+		super();
+		init();
+	}
+	
+
+	
 }
