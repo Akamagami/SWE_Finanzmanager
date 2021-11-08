@@ -2,9 +2,11 @@ package constants;
 
 import backend.nutzer.*;
 import backend.manager.*;
+import backend.konten.*;
 
 public enum ClassType {
-	NUTZER("Nutzer",Nutzer.class);
+	NUTZER("Nutzer",Nutzer.class),
+	KONTO("Konto",Konto.class);
 	
 	
 	private String displayName;
