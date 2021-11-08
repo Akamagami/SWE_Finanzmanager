@@ -21,4 +21,7 @@ public abstract class DataSet {
 	public Object get(String key) {
 		return values.get(key);
 	}
+	public ClassType getClassType() {
+		return classType;
+	}
 }

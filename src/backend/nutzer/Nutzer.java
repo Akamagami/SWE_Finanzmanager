@@ -36,5 +36,11 @@ public class Nutzer implements SavableObject{
 	public String getId() {
 		return id;
 	}
+
+
+	@Override
+	public String toString() {
+		return "Nutzer [name=" + name + ", icon=" + icon + ", id=" + id + "]";
+	}
 	
 }
