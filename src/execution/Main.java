@@ -1,5 +1,15 @@
 package execution;
 
+<<<<<<< HEAD
+public class Main {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}
+=======
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -23,3 +33,4 @@ public class Main extends Application {
     	System.out.println("hi");
     }
 }
+>>>>>>> refs/heads/main
