@@ -3,8 +3,9 @@ package backend.konten;
 import java.util.ArrayList;
 
 import backend.nutzer.Nutzer;
+import backend.speicher.SavableObject;
 
-public class Konto {
+public class Konto implements SavableObject{
 
 	private double kontostand;	
 	
@@ -79,6 +80,12 @@ public class Konto {
 		return "Konto [kontostand=" + kontostand + ", ersteller=" + ersteller + ", mitgliedList=" + mitgliedList
 				+ ", tList=" + tList + ", name=" + name + ", beschreibung=" + beschreibung + ", id=" + id + ", icon="
 				+ icon + ", aktiv=" + aktiv + "]";
+	}
+
+	@Override
+	public String getSaveString() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	

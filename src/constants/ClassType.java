@@ -6,7 +6,8 @@ import backend.konten.*;
 
 public enum ClassType {
 	NUTZER("Nutzer",Nutzer.class),
-	KONTO("Konto",Konto.class);
+	KONTO("Konto",Konto.class),
+	TRANSAKTION("Transaktion",Transaktion.class);
 	
 	
 	private String displayName;
