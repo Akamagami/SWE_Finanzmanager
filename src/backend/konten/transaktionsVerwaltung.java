@@ -13,5 +13,16 @@ public class transaktionsVerwaltung {
 		aktuellesDatum = datum;
 	}
 	
-	
+	public void addTransaktion(Transaktion trkn) {
+		if(!trkn.isAusgefuehrt()) {
+			trPipeline.add(trkn);
+		}
+	}
+	public void update() {
+		for(Transaktion trkn: trPipeline) {
+			if(trkn.getDatum().before(aktuellesDatum)) {
+				trkn.getZielKonto().addTransaktion(trkn);
+			}
+		}
+	}
 }
