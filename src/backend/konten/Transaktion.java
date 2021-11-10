@@ -1,6 +1,6 @@
 package backend.konten;
 
-import java.util.Date;
+import java.sql.Date;
 
 import backend.nutzer.Nutzer;
 import backend.speicher.SavableObject;

@@ -1,15 +1,15 @@
 package backend.konten;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 
-public class transaktionsVerwaltung {
+public class TransaktionsVerwaltung {
 
 	Date aktuellesDatum;
 	
 	ArrayList<Transaktion> trPipeline = new ArrayList<Transaktion>();
 	
-	public transaktionsVerwaltung(Date datum) {
+	public TransaktionsVerwaltung(Date datum) {
 		aktuellesDatum = datum;
 	}
 	
@@ -18,11 +18,15 @@ public class transaktionsVerwaltung {
 			trPipeline.add(trkn);
 		}
 	}
-	public void update() {
+	private void update() {
 		for(Transaktion trkn: trPipeline) {
 			if(trkn.getDatum().before(aktuellesDatum)) {
 				trkn.getZielKonto().addTransaktion(trkn);
 			}
 		}
+	}
+	public void update(Date datum) {
+		aktuellesDatum = datum;
+		this.update();
 	}
 }

@@ -1,6 +1,6 @@
 package backend.factories;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.Optional;
 
 import backend.konten.Konto;

@@ -1,7 +1,7 @@
 package backend.konten;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 
 import backend.nutzer.Nutzer;
 import backend.speicher.SavableObject;
@@ -9,8 +9,9 @@ import backend.speicher.SavableObject;
 public class Konto implements SavableObject{
 
 	private double kontostand;	
-	
+	private Date datum;
 	private Nutzer ersteller;
+	
 	private ArrayList<Nutzer> mitgliedList = new ArrayList<Nutzer>();
 	
 	private ArrayList<Transaktion> tList = new ArrayList<Transaktion>();
@@ -42,9 +43,20 @@ public class Konto implements SavableObject{
 	}
 	
 	public void updateKontostand(Date datum) {
-		//hier alles aufrechnen
+		int current = 0;
+		for(Transaktion trkn: tList) {
+			if(trkn.getDatum().before(datum)) {
+				current += trkn.getBetrag();
+			}
+		}
+		kontostand = current;
+		this.datum = datum;
 	}
 	
+	public Date getDatum() {
+		return datum;
+	}
+
 	public double getKontostand() {
 		return kontostand;
 	}

@@ -1,16 +1,24 @@
 package backend.speicher;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
+import backend.konten.TransaktionsVerwaltung;
 import backend.speicher.manager.EntityManagerList;
 import backend.speicher.manager.FactoryList;
 import constants.ClassType;
+
 
 public class Speicher {
 	
 	EntityManagerList emList = new EntityManagerList();
 	FactoryList facList = new FactoryList();
+	TransaktionsVerwaltung trVw = new TransaktionsVerwaltung(Date.valueOf("2020-10-10"));
+	
+	public TransaktionsVerwaltung getTrVw() {
+		return trVw;
+	}
 
 	public Speicher() {
 		super();
@@ -18,6 +26,7 @@ public class Speicher {
 	}
 	
 	private void init() {
+		
 		
 	}
 	/*--------------------------------------------------------------------------------------------------------------*/
@@ -58,4 +67,5 @@ public class Speicher {
 	private Object createObject(DataSet dataSet, String id) {//Diese Methode erstellt ein Ojekt mit einer festgelegten id, kann nur vom speicher selbst aufgerufen werden
 		return this.createObject(dataSet, Optional.of(id));
 	}
+	/*--------------------------------------------------------------------------------------------------------------*/
 }
