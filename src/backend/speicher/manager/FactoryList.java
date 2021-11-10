@@ -2,7 +2,9 @@ package backend.speicher.manager;
 
 import java.util.HashMap;
 
+import backend.factories.KontoFactory;
 import backend.factories.NutzerFactory;
+import backend.factories.TransaktionFactory;
 import backend.speicher.ElementFactory;
 import constants.ClassType;
 
@@ -16,6 +18,8 @@ public class FactoryList {
 	
 	private void init() {		
 			factories.put(ClassType.NUTZER,new NutzerFactory());
+			factories.put(ClassType.KONTO, new KontoFactory());
+			factories.put(ClassType.TRANSAKTION, new TransaktionFactory());
 	}
 	public ElementFactory get(ClassType cType) {
 		return factories.get(cType);

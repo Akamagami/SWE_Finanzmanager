@@ -1,6 +1,6 @@
 package execution;
 
-<<<<<<< HEAD
+
 public class Main {
 
 	public static void main(String[] args) {
@@ -9,8 +9,8 @@ public class Main {
 	}
 
 }
-=======
 
+/*
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -33,4 +33,4 @@ public class Main extends Application {
     	System.out.println("hi");
     }
 }
->>>>>>> refs/heads/main
+*/

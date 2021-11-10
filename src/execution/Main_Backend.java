@@ -2,8 +2,9 @@ package execution;
 
 import java.util.List;
 
-
+import backend.dataSets.KontoDataSet;
 import backend.dataSets.NutzerDataSet;
+import backend.konten.Konto;
 import backend.nutzer.Nutzer;
 import backend.speicher.DataSet;
 import backend.speicher.Speicher;
@@ -26,6 +27,14 @@ public class Main_Backend {
 		
 		for(Nutzer n:(List<Nutzer>)(List<?>) sp.getAll(ClassType.NUTZER)) {
 			System.out.println("nnutzer:" + n.toString());
+		}
+		/*------------------------------------------------------------------------*/
+		
+		DataSet K1 = new KontoDataSet(100.23,(Nutzer) sp.getObject(ClassType.NUTZER, "2"),"Konto1","Beeee",2);
+		Konto ko1 = (Konto) sp.createObject(K1);
+		
+		for(Konto n:(List<Konto>)(List<?>) sp.getAll(ClassType.KONTO)) {
+			System.out.println("Konto:" + n.toString());
 		}
 	}
 
