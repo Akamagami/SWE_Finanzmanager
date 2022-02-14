@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import backend.konten.TransaktionsVerwaltung;
+import backend.persistence.XMLAdapter;
 import backend.speicher.manager.EntityManagerList;
 import backend.speicher.manager.FactoryList;
 import constants.ClassType;
@@ -15,6 +16,7 @@ public class Speicher {
 	EntityManagerList emList = new EntityManagerList();
 	FactoryList facList = new FactoryList();
 	TransaktionsVerwaltung trVw = new TransaktionsVerwaltung(Date.valueOf("2020-10-10"));
+	XMLAdapter xmlAdapter = new XMLAdapter();
 	
 	public TransaktionsVerwaltung getTrVw() {
 		return trVw;
