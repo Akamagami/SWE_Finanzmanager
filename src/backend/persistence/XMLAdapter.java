@@ -4,8 +4,12 @@ import backend.speicher.Speicher;
 
 public class XMLAdapter implements DataAdapter {
 
-	private XMLWriter writer = new XMLWriter();
-	private XMLReader reader = new XMLReader();
+	private String path =  "data.xml";
+	
+	private XMLWriter writer = new XMLWriter(path);
+	private XMLReader reader = new XMLReader(path);
+	
+	
 	
 	public XMLAdapter() {
 		

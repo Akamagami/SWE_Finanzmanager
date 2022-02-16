@@ -25,9 +25,10 @@ import constants.ClassType;
 
 public class XMLWriter {
 	
-	public XMLWriter () {
-		
-
+	private String path = "";
+	
+	public XMLWriter (String path) {
+		this.path = path;
 	}
 	
 	public void writeAndSave(Speicher sp) {
@@ -35,7 +36,7 @@ public class XMLWriter {
 		try {
 			tr = TransformerFactory.newInstance().newTransformer();
 			tr.setOutputProperty(OutputKeys.INDENT, "yes");
-		    tr.transform(new DOMSource(this.writeDocument(sp)), new StreamResult(new File("file.xml")));
+		    tr.transform(new DOMSource(this.writeDocument(sp)), new StreamResult(new File(path)));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
