@@ -4,6 +4,8 @@ import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
+import backend.dataSets.TransaktionDataSet;
+import backend.konten.Transaktion;
 import backend.konten.TransaktionsVerwaltung;
 import backend.persistence.DataAdapter;
 import backend.persistence.XMLAdapter;
@@ -78,5 +80,20 @@ public class Speicher {
 	
 	public void save() {
 		dataAdapter.writeAndSave(this);
+	}
+	/*--------------------------------------------------------------------------------------------------------------*/
+	public Transaktion createAndAddTransaktion(TransaktionDataSet dataSet,Optional<String> optId) {
+		Transaktion ret = (Transaktion) this.createObject(dataSet,optId);
+		trVw.addTransaktion(ret);
+		trVw.update();
+		return ret;
+	}
+	public Transaktion createAndAddTransaktion(TransaktionDataSet dataSet) {
+		return this.createAndAddTransaktion(dataSet, Optional.empty());
+	}
+	
+	
+	public void updateTrVw(Date datum) {
+		trVw.update(datum);
 	}
 }

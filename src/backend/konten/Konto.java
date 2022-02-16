@@ -10,7 +10,7 @@ import backend.dataSets.*;
 
 public class Konto implements SavableObject{
 
-	private double kontostand;	
+	private double kontostand;	//initialer Kontostand wird nie geändert
 	private Date datum;
 	private Nutzer ersteller;
 	
@@ -44,23 +44,23 @@ public class Konto implements SavableObject{
 		trkn.setAusgefuehrt(true);
 	}
 	
-	public void updateKontostand(Date datum) {
-		int current = 0;
-		for(Transaktion trkn: tList) {
-			if(trkn.getDatum().before(datum)) {
-				current += trkn.getBetrag();
-			}
-		}
-		kontostand = current;
-		this.datum = datum;
-	}
+	
 	
 	public Date getDatum() {
 		return datum;
 	}
 
-	public double getKontostand() {
+	public double getInitKontostand() {
 		return kontostand;
+	}
+	public double getKontostand() {
+		double aktuellerKontostand = kontostand;
+		for(Transaktion t:tList) {
+			if(!t.isObsolet()) {
+				aktuellerKontostand+= t.getBetrag();
+			}
+		}
+		return aktuellerKontostand;
 	}
 
 	public Nutzer getErsteller() {

@@ -1,9 +1,11 @@
 package execution;
 
+import java.sql.Date;
 import java.util.List;
 
 import backend.dataSets.KontoDataSet;
 import backend.dataSets.NutzerDataSet;
+import backend.dataSets.TransaktionDataSet;
 import backend.konten.Konto;
 import backend.nutzer.Nutzer;
 import backend.persistence.XMLAdapter;
@@ -38,6 +40,14 @@ public class Main_Backend {
 		for(Konto n:(List<Konto>)(List<?>) sp.getAll(ClassType.KONTO)) {
 			System.out.println("Konto:" + n.toString());
 		}
+		
+		TransaktionDataSet t1 = new TransaktionDataSet(100.0, Date.valueOf("2020-11-10"), n1, ko1, "Schutzgeld", "Merci");
+		
+		sp.createAndAddTransaktion(t1);
+		System.out.println("Before:" + ko1.getKontostand());
+		sp.updateTrVw(Date.valueOf("2020-11-11"));
+		System.out.println("After:" + ko1.getKontostand());
+		
 		
 		sp.save();
 	}
