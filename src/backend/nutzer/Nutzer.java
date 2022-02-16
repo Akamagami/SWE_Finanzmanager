@@ -1,5 +1,7 @@
 package backend.nutzer;
 
+import backend.dataSets.NutzerDataSet;
+import backend.speicher.DataSet;
 import backend.speicher.SavableObject;
 
 public class Nutzer implements SavableObject{
@@ -40,7 +42,15 @@ public class Nutzer implements SavableObject{
 
 	@Override
 	public String toString() {
-		return "Nutzer [name=" + name + ", icon=" + icon + ", id=" + id + "]";
+		return id+"";
+	}
+
+
+	@Override
+	public DataSet getXMLDataSet() {
+		NutzerDataSet ret = new NutzerDataSet(name.getVorname(), name.getNachname(), icon);
+		ret.addKey("id", id);
+		return ret;
 	}
 	
 }

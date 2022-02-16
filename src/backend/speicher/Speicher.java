@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import backend.konten.TransaktionsVerwaltung;
+import backend.persistence.DataAdapter;
 import backend.persistence.XMLAdapter;
 import backend.speicher.manager.EntityManagerList;
 import backend.speicher.manager.FactoryList;
@@ -16,7 +17,7 @@ public class Speicher {
 	EntityManagerList emList = new EntityManagerList();
 	FactoryList facList = new FactoryList();
 	TransaktionsVerwaltung trVw = new TransaktionsVerwaltung(Date.valueOf("2020-10-10"));
-	XMLAdapter xmlAdapter = new XMLAdapter();
+	DataAdapter dataAdapter = null;
 	
 	public TransaktionsVerwaltung getTrVw() {
 		return trVw;
@@ -70,4 +71,12 @@ public class Speicher {
 		return this.createObject(dataSet, Optional.of(id));
 	}
 	/*--------------------------------------------------------------------------------------------------------------*/
+	
+	public void setDataAdapter (DataAdapter dA) {
+		dataAdapter = dA;
+	}
+	
+	public void save() {
+		dataAdapter.writeAndSave(this);
+	}
 }

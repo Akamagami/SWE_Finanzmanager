@@ -24,7 +24,9 @@ public abstract class DataSet {
 	public ClassType getClassType() {
 		return classType;
 	}
-	protected void addKey(String key, Object value) {
+	public void addKey(String key, Object value) {
 		values.put(key, value);
 	}
+	
+	
 }

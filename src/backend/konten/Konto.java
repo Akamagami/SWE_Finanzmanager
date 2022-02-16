@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.sql.Date;
 
 import backend.nutzer.Nutzer;
+import backend.speicher.DataSet;
 import backend.speicher.SavableObject;
+import backend.dataSets.*;
 
 public class Konto implements SavableObject{
 
@@ -92,18 +94,29 @@ public class Konto implements SavableObject{
 	public boolean isAktiv() {
 		return aktiv;
 	}
+	public boolean nutzerIstMitglied(Nutzer n) {
+		return mitgliedList.contains(n);
+	}
 
 	@Override
 	public String toString() {
-		return "Konto [kontostand=" + kontostand + ", ersteller=" + ersteller + ", mitgliedList=" + mitgliedList
-				+ ", tList=" + tList + ", name=" + name + ", beschreibung=" + beschreibung + ", id=" + id + ", icon="
-				+ icon + ", aktiv=" + aktiv + "]";
+		return id+"";
 	}
 
 	@Override
 	public String getSaveString() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public DataSet getXMLDataSet() {
+		DataSet ret = new KontoDataSet(kontostand, ersteller, name, beschreibung, icon);
+		ret.addKey("id", id);
+		ret.addKey("aktiv", aktiv);
+		ret.addKey("mitgliedList", mitgliedList);
+		ret.addKey("tList", tList);
+		return ret;
 	}
 
 	
