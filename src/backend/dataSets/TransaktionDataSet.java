@@ -1,6 +1,6 @@
 package backend.dataSets;
 
-import java.util.Date;
+import java.sql.Date;
 
 import backend.konten.Konto;
 import backend.nutzer.Nutzer;

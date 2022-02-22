@@ -25,9 +25,11 @@ public class Main_Backend {
 		System.out.println("Nutzer:" + n1.toString());
 		
 		n1 = (Nutzer) sp.createObject(N1);
-		System.out.println("Nutzer:" + n1.toString());
 		
 		
+		
+		DataSet N2 = new NutzerDataSet("Not", "Cool", 4);
+		n1 = (Nutzer) sp.createObject(N2);
 		
 		for(Nutzer n:(List<Nutzer>)(List<?>) sp.getAll(ClassType.NUTZER)) {
 			System.out.println("nnutzer:" + n.toString());
@@ -37,6 +39,7 @@ public class Main_Backend {
 		DataSet K1 = new KontoDataSet(100.23,(Nutzer) sp.getObject(ClassType.NUTZER, "2"),"Konto1","Beeee",2);
 		Konto ko1 = (Konto) sp.createObject(K1);
 		ko1.addMitglied((Nutzer) sp.getObject(ClassType.NUTZER, "1"));
+		ko1.addMitglied(n1);
 		for(Konto n:(List<Konto>)(List<?>) sp.getAll(ClassType.KONTO)) {
 			System.out.println("Konto:" + n.toString());
 		}

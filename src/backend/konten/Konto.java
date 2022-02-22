@@ -33,6 +33,7 @@ public class Konto implements SavableObject{
 		this.id = id;
 		this.icon = icon;
 		this.aktiv = true;
+		this.addMitglied(ersteller);
 	}
 	
 	public void addMitglied(Nutzer n) {
@@ -41,6 +42,7 @@ public class Konto implements SavableObject{
 	
 	public void addTransaktion(Transaktion trkn) {
 		tList.add(trkn);
+		trkn.setZielKonto(this);
 		trkn.setAusgefuehrt(true);
 	}
 	
@@ -66,7 +68,6 @@ public class Konto implements SavableObject{
 	public Nutzer getErsteller() {
 		return ersteller;
 	}
-
 	public ArrayList<Nutzer> getMitgliedList() {
 		return mitgliedList;
 	}
@@ -97,7 +98,15 @@ public class Konto implements SavableObject{
 	public boolean nutzerIstMitglied(Nutzer n) {
 		return mitgliedList.contains(n);
 	}
-
+	public boolean removeMitglied(Nutzer n) {
+		if(ersteller.equals(n)) {
+			return false;
+		}
+		else {
+			mitgliedList.remove(n);
+			return true;
+		}
+	}
 	@Override
 	public String toString() {
 		return id+"";

@@ -27,6 +27,8 @@ public abstract class DataSet {
 	public void addKey(String key, Object value) {
 		values.put(key, value);
 	}
-	
+	public boolean hasKey(String key) {
+		return values.containsKey(key);
+	}
 	
 }

@@ -41,11 +41,13 @@ public class Transaktion implements SavableObject {
 	public void setAusgefuehrt(boolean ausgefuehrt) {
 		this.ausgefuehrt = ausgefuehrt;
 	}
-
+	public void setZielKonto(Konto zielKonto) {
+		this.zielKonto = zielKonto;
+	}
 	public String getBeschreibung() {
 		return beschreibung;
 	}
-
+	
 	public String getTitel() {
 		return titel;
 	}

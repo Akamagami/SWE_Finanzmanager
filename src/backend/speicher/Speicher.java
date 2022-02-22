@@ -66,7 +66,13 @@ public class Speicher {
 
 	/*--------------------------------------------------------------------------------------------------------------*/
 	public Object createObject(DataSet dataSet) {//Diese Methode erstellt ein Objekt ohne eine Id festulegen, die ID wird automatisch generiert
-		return this.createObject(dataSet, Optional.empty());
+		if(dataSet.hasKey("id")) {
+			return this.createObject(dataSet, (String) dataSet.get("id"));
+		} else {
+			return this.createObject(dataSet, Optional.empty());
+		}
+		
+		
 	}
 
 	private Object createObject(DataSet dataSet, String id) {//Diese Methode erstellt ein Ojekt mit einer festgelegten id, kann nur vom speicher selbst aufgerufen werden
