@@ -7,7 +7,18 @@ import java.util.List;
 
 import com.example.swe_finanzmanager.backend.konten.Konto;
 import com.example.swe_finanzmanager.backend.nutzer.Nutzer;
+import com.example.swe_finanzmanager.backend.persistence.XMLAdapter;
 import com.example.swe_finanzmanager.constants.ClassType;
+
+/*Verwendung
+ * Speicher Sp = new Speicher
+ * sp.setDataAdapter(new XMLAdapter());
+ * UIUtils uiU = new UIUtils(sp)
+ * 
+ * sp.getAllNutzer();
+ * usw
+ */
+
 
 public class UIUtils {
 
