@@ -37,7 +37,6 @@ public class TransaktionFactory implements ElementFactory {
 			newIndex = index+"";
 			index++;
 		}
-		
 		Transaktion ret= new Transaktion((double) dataSet.get("betrag"),
 							(Date) dataSet.get("datum"), 
 							(Nutzer) dataSet.get("ersteller"),
@@ -45,8 +44,12 @@ public class TransaktionFactory implements ElementFactory {
 							(String) dataSet.get("beschreibung"),
 							(String) dataSet.get("titel"),
 							newIndex);
-		
-		
+		if(dataSet.hasKey("ausgefuehrt")) {
+			ret.setAusgefuehrt((boolean) dataSet.get("ausgefuehrt"));
+		}
+		if(dataSet.hasKey("obsolet")) {
+			ret.setAusgefuehrt((boolean) dataSet.get("obsolet"));
+		}	
 		return ret;
 	}
 

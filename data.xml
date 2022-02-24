@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<finanzmanager>
+    <NutzerList>
+        <Nutzer id="1">
+            <vorname>Hi</vorname>
+            <icon>2</icon>
+            <nachname>Work</nachname>
+            <id>1</id>
+        </Nutzer>
+        <Nutzer id="2">
+            <vorname>Hi</vorname>
+            <icon>2</icon>
+            <nachname>Work</nachname>
+            <id>2</id>
+        </Nutzer>
+        <Nutzer id="3">
+            <vorname>Not</vorname>
+            <icon>4</icon>
+            <nachname>Cool</nachname>
+            <id>3</id>
+        </Nutzer>
+    </NutzerList>
+    <TransaktionList>
+        <Transaktion id="1">
+            <datum>2020-11-10</datum>
+            <zielKonto>1</zielKonto>
+            <ersteller>3</ersteller>
+            <titel>Merci</titel>
+            <ausgefuehrt>true</ausgefuehrt>
+            <betrag>100.0</betrag>
+            <id>1</id>
+            <obsolet>false</obsolet>
+            <beschreibung>Schutzgeld</beschreibung>
+        </Transaktion>
+    </TransaktionList>
+    <KontoList>
+        <Konto id="1">
+            <ersteller>2</ersteller>
+            <tList>[1]</tList>
+            <mitgliedList>[2, 1, 3]</mitgliedList>
+            <kontostand>100.23</kontostand>
+            <name>Konto1</name>
+            <icon>2</icon>
+            <id>1</id>
+            <beschreibung>Beeee</beschreibung>
+            <aktiv>true</aktiv>
+        </Konto>
+    </KontoList>
+</finanzmanager>
