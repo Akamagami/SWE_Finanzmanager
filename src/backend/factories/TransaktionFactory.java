@@ -39,7 +39,7 @@ public class TransaktionFactory implements ElementFactory {
 		Transaktion ret= new Transaktion((double) dataSet.get("betrag"),
 							(Date) dataSet.get("datum"), 
 							(Nutzer) dataSet.get("ersteller"),
-							(Konto) dataSet.get("zielkonto"),
+							(Konto) dataSet.get("zielKonto"),
 							(String) dataSet.get("beschreibung"),
 							(String) dataSet.get("titel"),
 							newIndex);

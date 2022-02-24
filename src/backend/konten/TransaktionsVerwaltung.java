@@ -18,10 +18,10 @@ public class TransaktionsVerwaltung {
 			trPipeline.add(trkn);
 		}
 	}
-	private void update() {
+	public void update() {
 		for(Transaktion trkn: trPipeline) {
-			if(trkn.getDatum().before(aktuellesDatum)) {
-				trkn.getZielKonto().addTransaktion(trkn);
+			if(!trkn.isAusgefuehrt() && trkn.getDatum().before(aktuellesDatum)) {
+				trkn.getZielKonto().addTransaktion(trkn);			
 			}
 		}
 	}

@@ -2,7 +2,10 @@ package backend.konten;
 
 import java.sql.Date;
 
+import backend.dataSets.NutzerDataSet;
+import backend.dataSets.TransaktionDataSet;
 import backend.nutzer.Nutzer;
+import backend.speicher.DataSet;
 import backend.speicher.SavableObject;
 
 public class Transaktion implements SavableObject {
@@ -16,14 +19,14 @@ public class Transaktion implements SavableObject {
 	private boolean ausgefuehrt;
 	
 	private Nutzer ersteller;
-	private Konto ZielKonto;
+	private Konto zielKonto;
 	
 	public Transaktion(double betrag, Date datum, Nutzer ersteller, Konto zielKonto,String beschreibung, String titel,String id) {
 		super();
 		this.betrag = betrag;
 		this.datum = datum;
 		this.ersteller = ersteller;
-		ZielKonto = zielKonto;
+		this.zielKonto = zielKonto;
 		this.id = id;
 		this.obsolet = false;
 		this.beschreibung = beschreibung;
@@ -38,11 +41,13 @@ public class Transaktion implements SavableObject {
 	public void setAusgefuehrt(boolean ausgefuehrt) {
 		this.ausgefuehrt = ausgefuehrt;
 	}
-
+	public void setZielKonto(Konto zielKonto) {
+		this.zielKonto = zielKonto;
+	}
 	public String getBeschreibung() {
 		return beschreibung;
 	}
-
+	
 	public String getTitel() {
 		return titel;
 	}
@@ -72,13 +77,26 @@ public class Transaktion implements SavableObject {
 	}
 
 	public Konto getZielKonto() {
-		return ZielKonto;
+		return zielKonto;
 	}
 
 	@Override
 	public String getSaveString() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	@Override
+	public String toString() {
+		return id+"";
+	}
+
+	@Override
+	public DataSet getXMLDataSet() {
+		DataSet ret = new TransaktionDataSet(betrag,datum,ersteller,zielKonto,beschreibung,titel);
+		ret.addKey("id", id);
+		ret.addKey("obsolet", obsolet);
+		ret.addKey("ausgefuehrt", ausgefuehrt);
+		return ret;
 	}
 		
 }
