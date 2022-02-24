@@ -1,8 +1,9 @@
 package com.example.swe_finanzmanager.backend.nutzer;
 
-import backend.speicher.SavableObject;
+import com.example.swe_finanzmanager.backend.speicher.SavableObject;
+import com.example.swe_finanzmanager.backend.speicher.SavableObject;
 
-public class Nutzer implements SavableObject{
+public class Nutzer implements SavableObject {
 
 	private Name name;
 	private int icon; //number will get changed translated to icon in UI
