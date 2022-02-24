@@ -85,6 +85,9 @@ public class Speicher {
 	public void save() {
 		dataAdapter.writeAndSave(this);
 	}
+	public void load() {
+		dataAdapter.readAndLoad(this);
+	}
 	/*--------------------------------------------------------------------------------------------------------------*/
 	public Transaktion createAndAddTransaktion(TransaktionDataSet dataSet,Optional<String> optId) {
 		Transaktion ret = (Transaktion) this.createObject(dataSet,optId);

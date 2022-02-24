@@ -37,7 +37,10 @@ public class Konto implements SavableObject{
 	}
 	
 	public void addMitglied(Nutzer n) {
-		mitgliedList.add(n);
+		if(!mitgliedList.contains(n)) {
+			mitgliedList.add(n);
+		}
+		
 	}
 	
 	public void addTransaktion(Transaktion trkn) {

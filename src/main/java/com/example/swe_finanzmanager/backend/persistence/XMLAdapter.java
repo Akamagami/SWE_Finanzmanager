@@ -23,7 +23,7 @@ public class XMLAdapter implements DataAdapter {
 
 	@Override
 	public void readAndLoad(Speicher sp) {
-		// TODO Auto-generated method stub
+		reader.readAndLoad(sp);
 		
 	}
 	

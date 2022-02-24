@@ -89,7 +89,7 @@ public class XMLReader {
 				Integer.parseInt(element.getElementsByTagName("icon").item(0).getTextContent()));
 		
 		ret.addKey("id", element.getElementsByTagName("id").item(0).getTextContent());
-		ret.addKey("aktiv",element.getElementsByTagName("aktiv").item(0).getTextContent());
+		ret.addKey("aktiv",(element.getElementsByTagName("aktiv").item(0).getTextContent() == "true"));
 		
 		String mitgliederString = (String) element.getElementsByTagName("mitgliedList").item(0).getTextContent();
 		String tListString = (String) element.getElementsByTagName("tList").item(0).getTextContent();
@@ -97,22 +97,22 @@ public class XMLReader {
 		ret.addKey("mitgliedList", this.getNutzerFromString(mitgliederString));
 		ret.addKey("tList", this.getTransaktionenFromString(tListString));
 		
-		return null;
+		return ret;
 	}
 
 	private DataSet createTransaktionDataSet(Element element) {
 		
 		TransaktionDataSet ret = new TransaktionDataSet(
 			Double.parseDouble(element.getElementsByTagName("betrag").item(0).getTextContent()),
-			(Date) Date.valueOf(element.getElementsByTagName("datume").item(0).getTextContent()),
+			(Date) Date.valueOf(element.getElementsByTagName("datum").item(0).getTextContent()),
 			(Nutzer) sp.getObject(ClassType.NUTZER, element.getElementsByTagName("ersteller").item(0).getTextContent()),
 			(Konto) null,
 			(String) element.getElementsByTagName("beschreibung").item(0).getTextContent(),
 			(String) element.getElementsByTagName("titel").item(0).getTextContent());
 		
-		ret.addKey("id", element.getElementsByTagName("id").item(0).getTextContent());
-		ret.addKey("ausgefuehrt", element.getElementsByTagName("ausgefuehrt").item(0).getTextContent());
-		ret.addKey("obsolet", element.getElementsByTagName("obsolet").item(0).getTextContent());
+		ret.addKey("id", element.getElementsByTagName("id").item(0).getTextContent() );
+		ret.addKey("ausgefuehrt", (element.getElementsByTagName("ausgefuehrt").item(0).getTextContent() == "true"));
+		ret.addKey("obsolet", (element.getElementsByTagName("obsolet").item(0).getTextContent()== "true"));
 		return ret;
 	}
 
