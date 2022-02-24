@@ -2,12 +2,13 @@ package com.example.swe_finanzmanager.backend.nutzer;
 
 import java.util.List;
 
+
 import com.example.swe_finanzmanager.backend.dataSets.NutzerDataSet;
 import com.example.swe_finanzmanager.backend.speicher.DataSet;
 import com.example.swe_finanzmanager.backend.speicher.SavableObject;
 import com.example.swe_finanzmanager.backend.speicher.Speicher;
 
-public class Nutzer implements SavableObject{
+public class Nutzer implements SavableObject {
 
 	private Name name;
 	private int icon; //number will get changed translated to icon in UI
