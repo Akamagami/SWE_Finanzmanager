@@ -1,10 +1,13 @@
 package com.example.swe_finanzmanager.backend.manager;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 import com.example.swe_finanzmanager.backend.konten.Konto;
 import com.example.swe_finanzmanager.backend.speicher.EntityManager;
-
-import java.util.*;
 
 public class KontoEntityManager implements EntityManager<Konto> {
 	

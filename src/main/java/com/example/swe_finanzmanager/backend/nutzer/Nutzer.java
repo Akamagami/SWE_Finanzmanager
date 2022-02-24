@@ -1,6 +1,8 @@
 package com.example.swe_finanzmanager.backend.nutzer;
 
-import backend.speicher.SavableObject;
+import com.example.swe_finanzmanager.backend.dataSets.NutzerDataSet;
+import com.example.swe_finanzmanager.backend.speicher.DataSet;
+import com.example.swe_finanzmanager.backend.speicher.SavableObject;
 
 public class Nutzer implements SavableObject{
 
@@ -40,7 +42,15 @@ public class Nutzer implements SavableObject{
 
 	@Override
 	public String toString() {
-		return "Nutzer [name=" + name + ", icon=" + icon + ", id=" + id + "]";
+		return id+"";
+	}
+
+
+	@Override
+	public DataSet getXMLDataSet() {
+		NutzerDataSet ret = new NutzerDataSet(name.getVorname(), name.getNachname(), icon);
+		ret.addKey("id", id);
+		return ret;
 	}
 	
 }

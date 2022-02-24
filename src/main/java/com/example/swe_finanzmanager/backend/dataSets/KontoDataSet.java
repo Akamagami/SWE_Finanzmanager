@@ -1,6 +1,5 @@
 package com.example.swe_finanzmanager.backend.dataSets;
 
-
 import com.example.swe_finanzmanager.backend.nutzer.Nutzer;
 import com.example.swe_finanzmanager.backend.speicher.DataSet;
 import com.example.swe_finanzmanager.constants.ClassType;
