@@ -1,20 +1,23 @@
 package com.example.swe_finanzmanager.backend.speicher;
 
-
-import com.example.swe_finanzmanager.backend.konten.TransaktionsVerwaltung;
-import com.example.swe_finanzmanager.backend.speicher.manager.EntityManagerList;
-import com.example.swe_finanzmanager.backend.speicher.manager.FactoryList;
-import com.example.swe_finanzmanager.constants.ClassType;
-
 import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
+
+import com.example.swe_finanzmanager.backend.dataSets.TransaktionDataSet;
+import com.example.swe_finanzmanager.backend.konten.Transaktion;
+import com.example.swe_finanzmanager.backend.konten.TransaktionsVerwaltung;
+import com.example.swe_finanzmanager.backend.persistence.DataAdapter;
+import com.example.swe_finanzmanager.backend.speicher.manager.EntityManagerList;
+import com.example.swe_finanzmanager.backend.speicher.manager.FactoryList;
+import com.example.swe_finanzmanager.constants.ClassType;
 
 public class Speicher {
 	
 	EntityManagerList emList = new EntityManagerList();
 	FactoryList facList = new FactoryList();
 	TransaktionsVerwaltung trVw = new TransaktionsVerwaltung(Date.valueOf("2020-10-10"));
+	DataAdapter dataAdapter = null;
 	
 	public TransaktionsVerwaltung getTrVw() {
 		return trVw;
@@ -61,11 +64,40 @@ public class Speicher {
 
 	/*--------------------------------------------------------------------------------------------------------------*/
 	public Object createObject(DataSet dataSet) {//Diese Methode erstellt ein Objekt ohne eine Id festulegen, die ID wird automatisch generiert
-		return this.createObject(dataSet, Optional.empty());
+		if(dataSet.hasKey("id")) {
+			return this.createObject(dataSet, (String) dataSet.get("id"));
+		} else {
+			return this.createObject(dataSet, Optional.empty());
+		}
+		
+		
 	}
 
 	private Object createObject(DataSet dataSet, String id) {//Diese Methode erstellt ein Ojekt mit einer festgelegten id, kann nur vom speicher selbst aufgerufen werden
 		return this.createObject(dataSet, Optional.of(id));
 	}
 	/*--------------------------------------------------------------------------------------------------------------*/
+	
+	public void setDataAdapter (DataAdapter dA) {
+		dataAdapter = dA;
+	}
+	
+	public void save() {
+		dataAdapter.writeAndSave(this);
+	}
+	/*--------------------------------------------------------------------------------------------------------------*/
+	public Transaktion createAndAddTransaktion(TransaktionDataSet dataSet,Optional<String> optId) {
+		Transaktion ret = (Transaktion) this.createObject(dataSet,optId);
+		trVw.addTransaktion(ret);
+		trVw.update();
+		return ret;
+	}
+	public Transaktion createAndAddTransaktion(TransaktionDataSet dataSet) {
+		return this.createAndAddTransaktion(dataSet, Optional.empty());
+	}
+	
+	
+	public void updateTrVw(Date datum) {
+		trVw.update(datum);
+	}
 }

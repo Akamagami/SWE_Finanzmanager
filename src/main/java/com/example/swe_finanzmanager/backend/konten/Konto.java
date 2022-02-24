@@ -1,15 +1,16 @@
 package com.example.swe_finanzmanager.backend.konten;
 
+import java.sql.Date;
+import java.util.ArrayList;
 
+import com.example.swe_finanzmanager.backend.dataSets.KontoDataSet;
 import com.example.swe_finanzmanager.backend.nutzer.Nutzer;
+import com.example.swe_finanzmanager.backend.speicher.DataSet;
 import com.example.swe_finanzmanager.backend.speicher.SavableObject;
 
-import java.util.ArrayList;
-import java.util.Date;
+public class Konto implements SavableObject{
 
-public class Konto implements SavableObject {
-
-	private double kontostand;	
+	private double kontostand;	//initialer Kontostand wird nie ge�ndert
 	private Date datum;
 	private Nutzer ersteller;
 	
@@ -32,6 +33,7 @@ public class Konto implements SavableObject {
 		this.id = id;
 		this.icon = icon;
 		this.aktiv = true;
+		this.addMitglied(ersteller);
 	}
 	
 	public void addMitglied(Nutzer n) {
@@ -40,32 +42,32 @@ public class Konto implements SavableObject {
 	
 	public void addTransaktion(Transaktion trkn) {
 		tList.add(trkn);
+		trkn.setZielKonto(this);
 		trkn.setAusgefuehrt(true);
 	}
 	
-	public void updateKontostand(Date datum) {
-		int current = 0;
-		for(Transaktion trkn: tList) {
-			if(trkn.getDatum().before(datum)) {
-				current += trkn.getBetrag();
-			}
-		}
-		kontostand = current;
-		this.datum = datum;
-	}
+	
 	
 	public Date getDatum() {
 		return datum;
 	}
 
-	public double getKontostand() {
+	public double getInitKontostand() {
 		return kontostand;
+	}
+	public double getKontostand() {
+		double aktuellerKontostand = kontostand;
+		for(Transaktion t:tList) {
+			if(!t.isObsolet()) {
+				aktuellerKontostand+= t.getBetrag();
+			}
+		}
+		return aktuellerKontostand;
 	}
 
 	public Nutzer getErsteller() {
 		return ersteller;
 	}
-
 	public ArrayList<Nutzer> getMitgliedList() {
 		return mitgliedList;
 	}
@@ -93,18 +95,37 @@ public class Konto implements SavableObject {
 	public boolean isAktiv() {
 		return aktiv;
 	}
-
+	public boolean nutzerIstMitglied(Nutzer n) {
+		return mitgliedList.contains(n);
+	}
+	public boolean removeMitglied(Nutzer n) {
+		if(ersteller.equals(n)) {
+			return false;
+		}
+		else {
+			mitgliedList.remove(n);
+			return true;
+		}
+	}
 	@Override
 	public String toString() {
-		return "Konto [kontostand=" + kontostand + ", ersteller=" + ersteller + ", mitgliedList=" + mitgliedList
-				+ ", tList=" + tList + ", name=" + name + ", beschreibung=" + beschreibung + ", id=" + id + ", icon="
-				+ icon + ", aktiv=" + aktiv + "]";
+		return id+"";
 	}
 
 	@Override
 	public String getSaveString() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public DataSet getXMLDataSet() {
+		DataSet ret = new KontoDataSet(kontostand, ersteller, name, beschreibung, icon);
+		ret.addKey("id", id);
+		ret.addKey("aktiv", aktiv);
+		ret.addKey("mitgliedList", mitgliedList);
+		ret.addKey("tList", tList);
+		return ret;
 	}
 
 	

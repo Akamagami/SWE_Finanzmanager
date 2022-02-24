@@ -1,14 +1,13 @@
 package com.example.swe_finanzmanager.backend.factories;
 
+import java.util.Optional;
 
 import com.example.swe_finanzmanager.backend.konten.Konto;
 import com.example.swe_finanzmanager.backend.nutzer.Nutzer;
 import com.example.swe_finanzmanager.backend.speicher.DataSet;
 import com.example.swe_finanzmanager.backend.speicher.ElementFactory;
 
-import java.util.Optional;
-
-public class KontoFactory implements ElementFactory {
+public class KontoFactory implements ElementFactory{
 
 	int index = 1;
 	
@@ -36,7 +35,7 @@ public class KontoFactory implements ElementFactory {
 		}
 		
 		Konto ret= new Konto((double) dataSet.get("kontostand"),
-							(Nutzer) dataSet.get("ersteller"),
+							(Nutzer) dataSet.get("ersteller"), 
 							(String) dataSet.get("name"),
 							(String) dataSet.get("beschreibung"),
 							(Integer) dataSet.get("icon"),

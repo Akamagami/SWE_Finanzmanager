@@ -1,5 +1,6 @@
 package com.example.swe_finanzmanager.backend.speicher.manager;
 
+import java.util.HashMap;
 
 import com.example.swe_finanzmanager.backend.factories.KontoFactory;
 import com.example.swe_finanzmanager.backend.factories.NutzerFactory;
@@ -7,11 +8,11 @@ import com.example.swe_finanzmanager.backend.factories.TransaktionFactory;
 import com.example.swe_finanzmanager.backend.speicher.ElementFactory;
 import com.example.swe_finanzmanager.constants.ClassType;
 
-import java.util.HashMap;
+
 
 public class FactoryList {
 	
-	private HashMap<ClassType, ElementFactory> factories = new HashMap<ClassType,ElementFactory>();
+	private HashMap<ClassType,ElementFactory> factories = new HashMap<ClassType,ElementFactory>();
 	
 	public FactoryList() {
 		init();

@@ -1,11 +1,10 @@
 package com.example.swe_finanzmanager.backend.factories;
 
+import java.util.Optional;
 
 import com.example.swe_finanzmanager.backend.nutzer.Nutzer;
 import com.example.swe_finanzmanager.backend.speicher.DataSet;
 import com.example.swe_finanzmanager.backend.speicher.ElementFactory;
-
-import java.util.Optional;
 
 public class NutzerFactory implements ElementFactory {
 

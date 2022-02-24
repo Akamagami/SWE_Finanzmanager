@@ -1,12 +1,11 @@
 package com.example.swe_finanzmanager.backend.dataSets;
 
+import java.sql.Date;
 
 import com.example.swe_finanzmanager.backend.konten.Konto;
 import com.example.swe_finanzmanager.backend.nutzer.Nutzer;
 import com.example.swe_finanzmanager.backend.speicher.DataSet;
 import com.example.swe_finanzmanager.constants.ClassType;
-
-import java.util.Date;
 
 public class TransaktionDataSet extends DataSet {
 

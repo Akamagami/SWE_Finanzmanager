@@ -1,9 +1,10 @@
 package com.example.swe_finanzmanager.backend.speicher;
 
+import java.util.HashMap;
 
 import com.example.swe_finanzmanager.constants.ClassType;
 
-import java.util.HashMap;
+
 
 public abstract class DataSet {
 	
@@ -25,7 +26,11 @@ public abstract class DataSet {
 	public ClassType getClassType() {
 		return classType;
 	}
-	protected void addKey(String key, Object value) {
+	public void addKey(String key, Object value) {
 		values.put(key, value);
 	}
+	public boolean hasKey(String key) {
+		return values.containsKey(key);
+	}
+	
 }
