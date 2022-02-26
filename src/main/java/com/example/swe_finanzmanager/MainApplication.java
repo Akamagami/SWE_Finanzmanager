@@ -5,8 +5,10 @@ import com.example.swe_finanzmanager.backend.dataSets.NutzerDataSet;
 import com.example.swe_finanzmanager.backend.dataSets.TransaktionDataSet;
 import com.example.swe_finanzmanager.backend.konten.Konto;
 import com.example.swe_finanzmanager.backend.nutzer.Nutzer;
+import com.example.swe_finanzmanager.backend.persistence.XMLAdapter;
 import com.example.swe_finanzmanager.backend.speicher.DataSet;
 import com.example.swe_finanzmanager.backend.speicher.Speicher;
+import com.example.swe_finanzmanager.backend.speicher.UIUtils;
 import com.example.swe_finanzmanager.constants.ClassType;
 import com.example.swe_finanzmanager.frontend.MainController;
 import javafx.application.Application;
@@ -34,9 +36,12 @@ public class MainApplication extends Application {
 
     public static void main(String[] args) {
         Speicher sp = new Speicher();
-        //sp.setDataAdapter(new XMLAdapter());
+        sp.setDataAdapter(new XMLAdapter());
+        sp.load();
+        UIUtils uiUtils = new UIUtils(sp);
 
-        DataSet N1 = new NutzerDataSet("Hi", "Work", 2);
+        mainController.setUiUtils(uiUtils);
+        /*DataSet N1 = new NutzerDataSet("Hi", "Work", 2);
 
         Nutzer n1 = (Nutzer) sp.createObject(N1);
         System.out.println("Nutzer:" + n1.toString());
@@ -47,9 +52,9 @@ public class MainApplication extends Application {
 
         for(Nutzer n:(List<Nutzer>)(List<?>) sp.getAll(ClassType.NUTZER)) {
             System.out.println("nnutzer:" + n.toString());
-        }
+        }*/
         /*------------------------------------------------------------------------*/
-
+        /*
         DataSet K1 = new KontoDataSet(100.23,(Nutzer) sp.getObject(ClassType.NUTZER, "2"),"Konto1","Beeee",2);
         Konto ko1 = (Konto) sp.createObject(K1);
         ko1.addMitglied((Nutzer) sp.getObject(ClassType.NUTZER, "1"));
@@ -71,7 +76,7 @@ public class MainApplication extends Application {
         //System.out.println("After:" + ko1.getKontostand());
 
 
-        //sp.save();
+        //sp.save();*/
         launch();
     }
 }

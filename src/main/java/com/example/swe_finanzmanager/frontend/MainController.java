@@ -3,6 +3,7 @@ package com.example.swe_finanzmanager.frontend;
 import com.example.swe_finanzmanager.MainApplication;
 import com.example.swe_finanzmanager.backend.nutzer.Nutzer;
 import com.example.swe_finanzmanager.backend.speicher.Speicher;
+import com.example.swe_finanzmanager.backend.speicher.UIUtils;
 import com.example.swe_finanzmanager.constants.ClassType;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -23,7 +24,7 @@ import java.util.List;
 
 public class MainController {
 
-    private Speicher sp;
+    private UIUtils uiUtils;
 
     @FXML
     ListView listViewStart;
@@ -34,14 +35,14 @@ public class MainController {
     @FXML
     public void chooseUser() throws IOException {
         Nutzer selectedNutzer = (Nutzer) listViewStart.getSelectionModel().getSelectedItem();
-        System.out.println(selectedNutzer.getName().fullName());
 
         FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource("masterdetail.fxml"));
         MasterdetailController masterdetailController = new MasterdetailController();
         masterdetailController.setCurrentNutzer(selectedNutzer);
+        masterdetailController.setUiUtils(uiUtils);
 
         loader.setController(masterdetailController);
-        Scene masterDetailScene = new Scene(loader.load(), 720, 486);
+        Scene masterDetailScene = new Scene(loader.load(), 1280, 720);
 
         Stage stage = (Stage) root.getScene().getWindow();
         stage.setScene(masterDetailScene);
@@ -49,8 +50,8 @@ public class MainController {
     }
 
     public void initialize() {
-        List<Object> nutzerList = sp.getAll(ClassType.NUTZER);
-        ObservableList<Nutzer> nutzerObservableList = FXCollections.observableList((List<Nutzer>) (List<?>) nutzerList);
+        List<Nutzer> nutzerList = uiUtils.getAllNutzer();
+        ObservableList<Nutzer> nutzerObservableList = FXCollections.observableList(nutzerList);
         listViewStart.setCellFactory(new NutzerCellFactory());
         listViewStart.setItems(nutzerObservableList);
         listViewStart.refresh();
@@ -66,11 +67,11 @@ public class MainController {
         });
     }
 
-    public Speicher getSp() {
-        return sp;
+    public UIUtils getUiUtils() {
+        return uiUtils;
     }
 
-    public void setSp(Speicher sp) {
-        this.sp = sp;
+    public void setUiUtils(UIUtils uiUtils) {
+        this.uiUtils = uiUtils;
     }
 }
