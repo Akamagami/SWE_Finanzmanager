@@ -2,6 +2,8 @@ package com.example.swe_finanzmanager.backend.persistence;
 
 import java.io.File;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -15,6 +17,7 @@ import com.example.swe_finanzmanager.backend.dataSets.KontoDataSet;
 import com.example.swe_finanzmanager.backend.dataSets.NutzerDataSet;
 import com.example.swe_finanzmanager.backend.dataSets.TransaktionDataSet;
 import com.example.swe_finanzmanager.backend.konten.Konto;
+import com.example.swe_finanzmanager.backend.konten.Transaktion;
 import com.example.swe_finanzmanager.backend.nutzer.Nutzer;
 import com.example.swe_finanzmanager.backend.speicher.DataSet;
 import com.example.swe_finanzmanager.backend.speicher.Speicher;
@@ -86,26 +89,30 @@ public class XMLReader {
 				Integer.parseInt(element.getElementsByTagName("icon").item(0).getTextContent()));
 		
 		ret.addKey("id", element.getElementsByTagName("id").item(0).getTextContent());
-		ret.addKey("aktiv",element.getElementsByTagName("aktiv").item(0).getTextContent() );
-		String mitgliederString = (String) element.getElementsByTagName("beschreibung").item(0).getTextContent();
+		ret.addKey("aktiv",(element.getElementsByTagName("aktiv").item(0).getTextContent() == "true"));
 		
+		String mitgliederString = (String) element.getElementsByTagName("mitgliedList").item(0).getTextContent();
+		String tListString = (String) element.getElementsByTagName("tList").item(0).getTextContent();
 		
-		return null;
+		ret.addKey("mitgliedList", this.getNutzerFromString(mitgliederString));
+		ret.addKey("tList", this.getTransaktionenFromString(tListString));
+		
+		return ret;
 	}
 
 	private DataSet createTransaktionDataSet(Element element) {
 		
 		TransaktionDataSet ret = new TransaktionDataSet(
 			Double.parseDouble(element.getElementsByTagName("betrag").item(0).getTextContent()),
-			(Date) Date.valueOf(element.getElementsByTagName("datume").item(0).getTextContent()),
+			(Date) Date.valueOf(element.getElementsByTagName("datum").item(0).getTextContent()),
 			(Nutzer) sp.getObject(ClassType.NUTZER, element.getElementsByTagName("ersteller").item(0).getTextContent()),
 			(Konto) null,
 			(String) element.getElementsByTagName("beschreibung").item(0).getTextContent(),
 			(String) element.getElementsByTagName("titel").item(0).getTextContent());
 		
-		ret.addKey("id", element.getElementsByTagName("id").item(0).getTextContent());
-		ret.addKey("ausgefuehrt", element.getElementsByTagName("ausgefuehrt").item(0).getTextContent());
-		ret.addKey("obsolet", element.getElementsByTagName("obsolet").item(0).getTextContent());
+		ret.addKey("id", element.getElementsByTagName("id").item(0).getTextContent() );
+		ret.addKey("ausgefuehrt", (element.getElementsByTagName("ausgefuehrt").item(0).getTextContent() == "true"));
+		ret.addKey("obsolet", (element.getElementsByTagName("obsolet").item(0).getTextContent()== "true"));
 		return ret;
 	}
 
@@ -119,4 +126,30 @@ public class XMLReader {
 		ret.addKey("id", element.getElementsByTagName("id").item(0).getTextContent());
 		return ret;
 	}
+	
+	private List<Nutzer> getNutzerFromString(String strg){
+		List<Nutzer> ret = new ArrayList<Nutzer>();
+		
+		strg = strg.substring(1, strg.length() - 1);
+		strg = strg.replaceAll("\\s+","");
+		String[] nutzerList = strg.split(",");
+		
+		for(String s:nutzerList) {
+			ret.add((Nutzer) sp.getObject(ClassType.NUTZER,s));
+		}
+	return ret;	
+	}
+	private List<Transaktion> getTransaktionenFromString(String strg){
+		List<Transaktion> ret = new ArrayList<Transaktion>();
+		
+		strg = strg.substring(1, strg.length() - 1);
+		strg = strg.replaceAll("\\s+","");
+		String[] nutzerList = strg.split(",");
+		
+		for(String s:nutzerList) {
+			ret.add((Transaktion) sp.getObject(ClassType.TRANSAKTION,s));
+		}
+	return ret;	
+	}
+	
 }

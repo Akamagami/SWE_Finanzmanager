@@ -37,7 +37,10 @@ public class Konto implements SavableObject{
 	}
 	
 	public void addMitglied(Nutzer n) {
-		mitgliedList.add(n);
+		if(!mitgliedList.contains(n)) {
+			mitgliedList.add(n);
+		}
+		
 	}
 	
 	public void addTransaktion(Transaktion trkn) {
@@ -94,6 +97,9 @@ public class Konto implements SavableObject{
 
 	public boolean isAktiv() {
 		return aktiv;
+	}
+	public void setAktiv(boolean aktiv) {
+		this.aktiv = aktiv;
 	}
 	public boolean nutzerIstMitglied(Nutzer n) {
 		return mitgliedList.contains(n);
