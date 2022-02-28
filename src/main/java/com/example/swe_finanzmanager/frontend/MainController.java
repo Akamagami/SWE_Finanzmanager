@@ -10,6 +10,7 @@ import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -17,6 +18,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -47,6 +49,10 @@ public class MainController {
         Stage stage = (Stage) root.getScene().getWindow();
         stage.setScene(masterDetailScene);
         stage.show();
+
+        Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+        stage.setX((primaryScreenBounds.getWidth() - stage.getWidth()) / 2);
+        stage.setY((primaryScreenBounds.getHeight() - stage.getHeight()) / 2);
     }
 
     public void initialize() {

@@ -10,9 +10,7 @@
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.example.swe_finanzmanager.frontend.DetailpageController"
             >
-    <GridPane>
-        <Label fx:id="title" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
-        <Label fx:id="kontoStand" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+    <GridPane fx:id="gridPane">
     </GridPane>
 
 </Pane>
