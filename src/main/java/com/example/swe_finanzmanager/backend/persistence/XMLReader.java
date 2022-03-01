@@ -59,7 +59,12 @@ public class XMLReader {
 			 
 			 if (node.getNodeType() == Node.ELEMENT_NODE){
 				 DataSet dataSet = createDataSetFromNode((Element) node, classType);
-				 sp.createObject(dataSet);
+				 if(classType == ClassType.TRANSAKTION) {
+					 sp.createAndAddTransaktion((TransaktionDataSet) dataSet);
+				 } else {
+					 sp.createObject(dataSet);
+				 }
+				 
 			 }
 					 
 		}
