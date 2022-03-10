@@ -4,6 +4,7 @@ module com.example.swe_finanzmanager {
     requires java.sql;
 	requires java.xml;
 	requires org.junit.jupiter.api;
+	requires org.mockito;
 
 
 
