@@ -11,6 +11,12 @@ import org.junit.jupiter.api.Test;
 
 public class KontoFactoryTest {
 	  @Test
+	  public void testObjectCreation() {
+		  
+	  }
+	
+	
+	  @Test
 	  public void test() {
 	    List<String> mockList = mock(List.class);
 	    mockList.add("First");
