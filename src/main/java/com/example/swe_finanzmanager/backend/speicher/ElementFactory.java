@@ -6,7 +6,7 @@ import java.util.Optional;
 
 public interface ElementFactory {
 	
-	public int getIndex();
+	public String getIndex();
 	
 	public void setIndex(String id);
 	

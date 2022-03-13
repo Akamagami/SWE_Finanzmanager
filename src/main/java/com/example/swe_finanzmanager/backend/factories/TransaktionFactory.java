@@ -16,8 +16,8 @@ public class TransaktionFactory implements ElementFactory {
 	int index = 1;
 	
 	@Override
-	public int getIndex() {
-		return index;
+	public String getIndex() {
+		return index+"";
 	}
 
 	@Override

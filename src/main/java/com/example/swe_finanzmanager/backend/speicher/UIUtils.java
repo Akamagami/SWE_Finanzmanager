@@ -11,11 +11,10 @@ import com.example.swe_finanzmanager.backend.persistence.XMLAdapter;
 import com.example.swe_finanzmanager.constants.ClassType;
 
 /*Verwendung
- * Speicher Sp = new Speicher
- * sp.setDataAdapter(new XMLAdapter());
+
  * UIUtils uiU = new UIUtils(sp)
  * 
- * sp.getAllNutzer();
+ * uiU.getAllNutzer();
  * usw
  */
 
@@ -24,9 +23,16 @@ public class UIUtils {
 
 	Speicher sp;
 	
-	public UIUtils(Speicher sp) {
-		this.sp = sp;
+	public UIUtils() {
+		initSpeicher();
 	}
+	
+	private void initSpeicher() {
+		sp = new Speicher();
+		sp.setDataAdapter(new XMLAdapter());
+		this.load();
+	}
+	
 	
 	public Nutzer getNutzer(String id) {
 		return (Nutzer) sp.getObject(ClassType.NUTZER, id);
@@ -57,5 +63,12 @@ public class UIUtils {
 			}
 		}
 		return ret;
+	}
+	
+	public void load() {
+		sp.load();
+	}
+	public void save() {
+		sp.save();
 	}
 }

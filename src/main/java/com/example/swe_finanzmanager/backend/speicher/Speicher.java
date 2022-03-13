@@ -96,16 +96,18 @@ public class Speicher {
 		return ret;
 	}
 	public Transaktion createAndAddTransaktion(TransaktionDataSet dataSet) {
-		return this.createAndAddTransaktion(dataSet, Optional.empty());
+		if(dataSet.hasKey("id")) {
+			return this.createAndAddTransaktion(dataSet, Optional.of((String) dataSet.get("id")));
+		} else {
+			return this.createAndAddTransaktion(dataSet, Optional.empty());
+		}
 	}
 	
 	
 	public void updateTrVw(Date datum) {
 		trVw.update(datum);
 	}
-	/*****utils****
-	 * ****
-	 * 
+
 /*--------------------------------------------------------------------------------------------------------------*/
 	
 	
