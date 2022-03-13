@@ -31,7 +31,7 @@ public class KontoFactoryTest {
 		 assertEquals(testFactory.getIndex(), testIndex.toString());
 	 }
 	 @Test
-	 public void testNutzerCreationWithoutId() {
+	 public void testKontoCreationWithoutId() {
 		 //Object Values
 		 double kontostand = 0;
 		 Nutzer ersteller = mock(Nutzer.class);
@@ -57,7 +57,7 @@ public class KontoFactoryTest {
 		 assertEquals(testKonto.getId(), (Integer.parseInt(testFactory.getIndex())-1)+"");
 	 }
 	 @Test
-	 public void testNutzerCreationWithIdAndValues() {
+	 public void testKontoCreationWithIdAndValues() {
 		//Object Values
 		 double kontostand = 0;
 		 Nutzer ersteller = mock(Nutzer.class);
@@ -107,7 +107,7 @@ public class KontoFactoryTest {
 		 assertEquals(testKonto.gettList().equals(tList),true);
 	 }
 	 @Test
-	 public void testNutzerCreationWithoutLowerId() {
+	 public void testKontoCreationWithoutLowerId() {
 		 //Object Values
 		 double kontostand = 0;
 		 Nutzer ersteller = mock(Nutzer.class);
