@@ -7,6 +7,7 @@ import com.example.swe_finanzmanager.constants.ClassType;
 public class KontoDataSet extends DataSet {
 
 	public KontoDataSet(double kontostand, Nutzer ersteller, String name, String beschreibung, int icon) {
+		////not an actual change
 		super(ClassType.KONTO);
 		this.addKey("kontostand", kontostand);
 		this.addKey("ersteller", ersteller);
