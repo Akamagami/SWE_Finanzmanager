@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import com.example.swe_finanzmanager.backend.konten.Konto;
 import com.example.swe_finanzmanager.backend.nutzer.Nutzer;
 import com.example.swe_finanzmanager.backend.speicher.EntityManager;
 
@@ -18,7 +19,11 @@ public class NutzerEntityManager implements EntityManager<Nutzer> {
 	
 	@Override
 	public Optional<Nutzer> get(String id) {
-		return Optional.of(list.get(id));
+		if(list.containsKey(id)) {
+			return Optional.of(list.get(id));
+		} else {
+			return Optional.empty();
+		}
 	}
 
 	@Override

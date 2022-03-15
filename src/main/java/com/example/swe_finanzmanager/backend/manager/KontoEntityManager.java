@@ -15,7 +15,11 @@ public class KontoEntityManager implements EntityManager<Konto> {
 	
 	@Override
 	public Optional<Konto> get(String id) {
-		return Optional.of(list.get(id));
+		if(list.containsKey(id)) {
+			return Optional.of(list.get(id));
+		} else {
+			return Optional.empty();
+		}
 	}
 
 	@Override
