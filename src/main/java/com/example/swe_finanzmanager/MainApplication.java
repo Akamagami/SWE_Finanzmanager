@@ -35,10 +35,7 @@ public class MainApplication extends Application {
     }
 
     public static void main(String[] args) {
-        Speicher sp = new Speicher();
-        sp.setDataAdapter(new XMLAdapter());
-        sp.load();
-        UIUtils uiUtils = new UIUtils(sp);
+        UIUtils uiUtils = new UIUtils();
 
         mainController.setUiUtils(uiUtils);
         /*DataSet N1 = new NutzerDataSet("Hi", "Work", 2);

@@ -53,6 +53,7 @@ public class MainController {
         Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
         stage.setX((primaryScreenBounds.getWidth() - stage.getWidth()) / 2);
         stage.setY((primaryScreenBounds.getHeight() - stage.getHeight()) / 2);
+        masterdetailController.build();
     }
 
     public void initialize() {

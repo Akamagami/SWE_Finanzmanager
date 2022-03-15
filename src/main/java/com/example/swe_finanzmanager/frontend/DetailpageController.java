@@ -20,13 +20,11 @@ public class DetailpageController {
 
     private Konto currentKonto;
 
-
     @FXML
     GridPane gridPane;
 
-
     public void build() {
-        gridPane.getChildren().clear();
+        clear();
 
         GridPane infoPane = new GridPane();
         Label name = new Label("Kontoname");
@@ -80,11 +78,17 @@ public class DetailpageController {
         ObservableList<Nutzer> mitgliederObservableList = FXCollections.observableList(currentKonto.getMitgliedList());
         mitgliederListView.setCellFactory(new MitgliederCellFactory());
         mitgliederListView.setItems(mitgliederObservableList);
+        mitgliederListView.setMouseTransparent(true);
+        mitgliederListView.setFocusTraversable(false);
         mitgliederListView.refresh();
 
         GridPane.setMargin(infoPane, new Insets(5));
         GridPane.setMargin(transaktionsPane, new Insets(10));
         GridPane.setMargin(mitgliederPane, new Insets(10));
+    }
+
+    public void clear() {
+        gridPane.getChildren().clear();
     }
 
     public Konto getCurrentKonto() {
