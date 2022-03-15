@@ -33,7 +33,7 @@ public class KontoFactoryTest {
 	 @Test
 	 public void testKontoCreationWithoutId() {
 		 //Object Values
-		 double kontostand = 0;
+		 double kontostand = 3423;
 		 Nutzer ersteller = mock(Nutzer.class);
 		 String name = "KontoName";
 		 String beschreibung = "KontoBeschreibung";
