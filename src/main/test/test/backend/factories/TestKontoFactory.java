@@ -20,7 +20,7 @@ import com.example.swe_finanzmanager.backend.speicher.DataSet;
 import com.example.swe_finanzmanager.backend.speicher.ElementFactory;
 
 
-public class KontoFactoryTest {
+public class TestKontoFactory {
 	@Test
 	 public void testGetAndSetIndex() {
 		 ElementFactory testFactory = new KontoFactory();
