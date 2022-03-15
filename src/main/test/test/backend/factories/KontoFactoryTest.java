@@ -59,7 +59,7 @@ public class KontoFactoryTest {
 	 @Test
 	 public void testKontoCreationWithIdAndValues() {
 		//Object Values
-		 double kontostand = 0;
+		 double kontostand = 2423;
 		 Nutzer ersteller = mock(Nutzer.class);
 		 String name = "KontoName";
 		 String beschreibung = "KontoBeschreibung";
@@ -109,7 +109,7 @@ public class KontoFactoryTest {
 	 @Test
 	 public void testKontoCreationWithoutLowerId() {
 		 //Object Values
-		 double kontostand = 0;
+		 double kontostand = 234234;
 		 Nutzer ersteller = mock(Nutzer.class);
 		 String name = "KontoName";
 		 String beschreibung = "KontoBeschreibung";
