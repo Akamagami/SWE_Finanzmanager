@@ -2,6 +2,7 @@ package test.backend.factories;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;
@@ -102,9 +103,9 @@ public class TestKontoFactory {
 		 assertEquals(testFactory.getIndex(), (Integer.parseInt(id)+1)+"");
 		 //check if all list vallues are added
 		 for(Nutzer n:mitgliedList) {
-			 assertEquals(testKonto.nutzerIstMitglied(n),true);
+			 assertTrue(testKonto.nutzerIstMitglied(n));
 		 }
-		 assertEquals(testKonto.gettList().equals(tList),true);
+		 assertTrue(testKonto.gettList().equals(tList));
 	 }
 	 @Test
 	 public void testKontoCreationWithoutLowerId() {
