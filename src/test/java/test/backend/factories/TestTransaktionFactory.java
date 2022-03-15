@@ -17,7 +17,7 @@ import com.example.swe_finanzmanager.backend.nutzer.Nutzer;
 import com.example.swe_finanzmanager.backend.speicher.DataSet;
 import com.example.swe_finanzmanager.backend.speicher.ElementFactory;
 
-public class TransaktionFactoryTest {
+public class TestTransaktionFactory {
 	 @Test
 	 public void testGetAndSetIndex() {
 		 ElementFactory testFactory = new TransaktionFactory();

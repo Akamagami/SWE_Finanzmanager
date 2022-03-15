@@ -26,7 +26,7 @@ public class Konto implements SavableObject{
 	
 	public Konto(double kontostand, Nutzer ersteller, String name, String beschreibung, int icon, String id) {
 		super();
-		//this.kontostand = kontostand;
+		this.kontostand = kontostand;
 		this.ersteller = ersteller;
 		this.name = name;
 		this.beschreibung = beschreibung;
