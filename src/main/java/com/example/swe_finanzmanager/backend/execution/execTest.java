@@ -11,11 +11,13 @@ import com.example.swe_finanzmanager.backend.nutzer.Nutzer;
 import com.example.swe_finanzmanager.backend.persistence.XMLAdapter;
 import com.example.swe_finanzmanager.backend.speicher.DataSet;
 import com.example.swe_finanzmanager.backend.speicher.Speicher;
+import com.example.swe_finanzmanager.backend.speicher.UIUtils;
 import com.example.swe_finanzmanager.constants.ClassType;
 
 public class execTest {
 
 	public static void main(String[] args) {
+		UIUtils uiu = new UIUtils();
 		Speicher sp = new Speicher();
 		sp.setDataAdapter(new XMLAdapter());
 		
