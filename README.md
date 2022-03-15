@@ -1,3 +1,3 @@
 # SWE_Finanzmanager
 Der finanzmanager
-[![Java CI with Maven](https://github.com/Akamagami/SWE_Finanzmanager/actions/workflows/main.yml/badge.svg)](https://github.com/Akamagami/SWE_Finanzmanager/actions/workflows/main.yml)
+[![Java CI](https://github.com/Akamagami/SWE_Finanzmanager/actions/workflows/junit.yml/badge.svg)](https://github.com/Akamagami/SWE_Finanzmanager/actions/workflows/junit.yml)
