@@ -1,4 +1,4 @@
-package com.example.swe_finanzmanager.backend.konten;
+package test.backend.konto;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -7,6 +7,8 @@ import static org.mockito.Mockito.*;
 
 import org.junit.jupiter.api.Test;
 
+import com.example.swe_finanzmanager.backend.konten.Konto;
+import com.example.swe_finanzmanager.backend.konten.Transaktion;
 import com.example.swe_finanzmanager.backend.nutzer.Nutzer;
 
 public class TestKonto {
