@@ -11,7 +11,7 @@ import com.example.swe_finanzmanager.backend.speicher.SavableObject;
 public class Konto implements SavableObject{
 
 	private double kontostand;	//initialer Kontostand wird nie ge�ndert
-	private Date datum;
+	//private Date datum;
 	private Nutzer ersteller;
 	
 	private ArrayList<Nutzer> mitgliedList = new ArrayList<Nutzer>();
@@ -51,9 +51,9 @@ public class Konto implements SavableObject{
 	
 	
 	
-	public Date getDatum() {
+	/*public Date getDatum() {
 		return datum;
-	}
+	}*/
 
 	public double getInitKontostand() {
 		return kontostand;
