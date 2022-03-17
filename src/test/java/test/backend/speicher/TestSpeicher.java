@@ -148,6 +148,7 @@ public class TestSpeicher {
 		 //check that ausgefuehrt ist true
 		 Transaktion t1 = (Transaktion) sp.getObject(ClassType.TRANSAKTION, id);	
 		 assertFalse(t1.isAusgefuehrt());
+		 //änderung des datums -> transaktion sollte augeführt werden
 		 sp.updateTrVw(datum);
 		 assertTrue(t1.isAusgefuehrt());
 	}
