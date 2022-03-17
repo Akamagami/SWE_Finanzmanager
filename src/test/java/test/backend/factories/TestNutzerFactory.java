@@ -32,17 +32,12 @@ public class TestNutzerFactory {
 		 String nachname = "Hunt";
 		 int icon = 42;
 		 //mock the data set
-		 DataSet mockDataSet = mock(DataSet.class);
-		 when(mockDataSet.get("vorname")).thenReturn(vorname);
-		 when(mockDataSet.get("nachname")).thenReturn(nachname);
-		 when(mockDataSet.get("icon")).thenReturn(icon);
+		 DataSet mockDataSet = createMockNutzerDataSet(vorname, nachname, icon);
 		 //create Object
 		 ElementFactory testFactory = new NutzerFactory();
 		 
 		 Nutzer testNutzer = (Nutzer) testFactory.create(mockDataSet, Optional.empty());
-		 assertEquals(testNutzer.getName().getVorname(),vorname);
-		 assertEquals(testNutzer.getName().getNachname(),nachname);
-		 assertEquals(testNutzer.getIcon(),icon);
+		 assertEqualsAllDataSetValuesForNutzer(testNutzer, mockDataSet);
 		 assertEquals(testNutzer.getId(), (Integer.parseInt(testFactory.getIndex())-1)+"");
 	 }
 	 @Test
@@ -53,17 +48,12 @@ public class TestNutzerFactory {
 		 int icon = 42;
 		 String id = "630";
 		 //mock the data set
-		 DataSet mockDataSet = mock(DataSet.class);
-		 when(mockDataSet.get("vorname")).thenReturn(vorname);
-		 when(mockDataSet.get("nachname")).thenReturn(nachname);
-		 when(mockDataSet.get("icon")).thenReturn(icon);
+		 DataSet mockDataSet = createMockNutzerDataSet(vorname, nachname, icon);
 		 //create Object
 		 ElementFactory testFactory = new NutzerFactory();
 		 
 		 Nutzer testNutzer = (Nutzer) testFactory.create(mockDataSet, Optional.of(id));
-		 assertEquals(testNutzer.getName().getVorname(),vorname);
-		 assertEquals(testNutzer.getName().getNachname(),nachname);
-		 assertEquals(testNutzer.getIcon(),icon);
+		 assertEqualsAllDataSetValuesForNutzer(testNutzer, mockDataSet);
 		 assertEquals(testNutzer.getId(), id);
 		 assertEquals(testFactory.getIndex(), (Integer.parseInt(id)+1)+"");
 		 
@@ -78,21 +68,27 @@ public class TestNutzerFactory {
 		 String id = "20";
 		 String newIndex = "42";
 		 //mock the data set
+		 DataSet mockDataSet = createMockNutzerDataSet(vorname, nachname, icon);
+		 //create Object
+		 ElementFactory testFactory = new NutzerFactory();
+		 testFactory.setIndex(newIndex);
+		 //createObject
+		 Nutzer testNutzer = (Nutzer) testFactory.create(mockDataSet, Optional.of(id));
+		 assertEqualsAllDataSetValuesForNutzer(testNutzer, mockDataSet);;
+		 assertEquals(testNutzer.getId(), id);
+		 assertEquals(testFactory.getIndex(),newIndex);
+	 }
+	 private DataSet createMockNutzerDataSet(String vorname, String nachname, int icon) {
 		 DataSet mockDataSet = mock(DataSet.class);
 		 when(mockDataSet.get("vorname")).thenReturn(vorname);
 		 when(mockDataSet.get("nachname")).thenReturn(nachname);
 		 when(mockDataSet.get("icon")).thenReturn(icon);
-		 //create Object
-		 ElementFactory testFactory = new NutzerFactory();
-		 testFactory.setIndex(newIndex);
-		 
-		 Nutzer testNutzer = (Nutzer) testFactory.create(mockDataSet, Optional.of(id));
-		 assertEquals(testNutzer.getName().getVorname(),vorname);
-		 assertEquals(testNutzer.getName().getNachname(),nachname);
-		 assertEquals(testNutzer.getIcon(),icon);
-		 assertEquals(testNutzer.getId(), id);
-		 assertEquals(testFactory.getIndex(),newIndex);
+		 return mockDataSet;
 	 }
-	 
+	 private void assertEqualsAllDataSetValuesForNutzer(Nutzer testNutzer, DataSet mockDataSet) {
+		 assertEquals(testNutzer.getName().getVorname(),mockDataSet.get("vorname"));
+		 assertEquals(testNutzer.getName().getNachname(),mockDataSet.get("nachname"));
+		 assertEquals(testNutzer.getIcon(),mockDataSet.get("icon"));
+	 }
 	 
 }

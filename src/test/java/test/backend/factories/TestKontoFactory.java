@@ -73,7 +73,7 @@ public class TestKontoFactory {
 		ElementFactory testFactory = new KontoFactory();
 		// check values
 		Konto testKonto = (Konto) testFactory.create(mockDataSet, Optional.of(id));
-		assertEqualsAllDataSetValuesForKonto(testKonto, mockDataSet);		
+		assertEqualsAllDataSetValuesForKonto(testKonto, mockDataSet);
 		assertEquals(testKonto.getId(), id);
 		assertEquals(testFactory.getIndex(), (Integer.parseInt(id) + 1) + "");
 
