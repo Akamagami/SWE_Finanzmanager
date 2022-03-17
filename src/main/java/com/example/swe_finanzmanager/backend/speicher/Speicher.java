@@ -97,7 +97,7 @@ public class Speicher {
 	private Transaktion createAndAddTransaktion(TransaktionDataSet dataSet,Optional<String> optId) {
 		Transaktion ret = (Transaktion) this.createObject(dataSet,optId);
 		trVw.addTransaktion(ret);
-		trVw.update();
+		//trVw.update();
 		return ret;
 	}
 	public Transaktion createAndAddTransaktion(TransaktionDataSet dataSet) {

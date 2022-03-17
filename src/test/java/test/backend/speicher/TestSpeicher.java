@@ -1,12 +1,18 @@
 package test.backend.speicher;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+
+import java.sql.Date;
+import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 
 import com.example.swe_finanzmanager.backend.dataSets.NutzerDataSet;
+import com.example.swe_finanzmanager.backend.dataSets.TransaktionDataSet;
+import com.example.swe_finanzmanager.backend.konten.Konto;
+import com.example.swe_finanzmanager.backend.konten.Transaktion;
 import com.example.swe_finanzmanager.backend.nutzer.Nutzer;
 import com.example.swe_finanzmanager.backend.speicher.DataSet;
 import com.example.swe_finanzmanager.backend.speicher.Speicher;
@@ -81,10 +87,71 @@ public class TestSpeicher {
 		sp.delete(ClassType.NUTZER, id + "");
 		assertEquals(sp.getObject(ClassType.NUTZER, id + ""), null);
 	}
+
 	/*
-	 * Check special methods to ad transaktion, since they neec to be added to the
+	 * Check special methods to add transaktion, since they neec to be added to the
 	 * Transaktionsverwaltung aswell
 	 */
+	@Test
+	public void testAddingTransaktion() {
+		 //speicher instanz
+		 Speicher sp = new Speicher();
+		 //data
+		 double betrag = 122;
+		 Date datum = Date.valueOf("1990-04-04"); //past transaktion
+		 Nutzer ersteller = mock(Nutzer.class);
+		 Konto zielKonto = new Konto(200, mock(Nutzer.class), "Name", "Beschreibung", 42, "9238472"); //echtes konto ist wichtig für verknüpfung
+		 String beschreibung = "Schutzgeld";
+		 String titel = "Titel";
+		 //mock the data set
+		 TransaktionDataSet mockDataSet = mock(TransaktionDataSet.class);
+		 when(mockDataSet.get("betrag")).thenReturn(betrag);
+		 when(mockDataSet.get("datum")).thenReturn(datum);
+		 when(mockDataSet.get("ersteller")).thenReturn(ersteller);
+		 when(mockDataSet.get("zielKonto")).thenReturn(zielKonto);
+		 when(mockDataSet.get("beschreibung")).thenReturn(beschreibung);
+		 when(mockDataSet.get("titel")).thenReturn(titel);
+		 when(mockDataSet.getClassType()).thenReturn(ClassType.TRANSAKTION);
+		 //add and create transaktion
+		 
+		 sp.createAndAddTransaktion(mockDataSet);
+		 //check that ausgefuehrt ist true
+		 Transaktion t1 = (Transaktion) sp.getObject(ClassType.TRANSAKTION, "1");	
+		 assertTrue(t1.isAusgefuehrt());
+	}
+	@Test
+	public void testAddingFutureTransaktionWithId() {
+		 //speicher instanz
+		 Speicher sp = new Speicher();
+		 //data
+		 double betrag = 122;
+		 Date datum = Date.valueOf("8888-04-04"); //future transaktion
+		 Nutzer ersteller = mock(Nutzer.class);
+		 Konto zielKonto = new Konto(200, mock(Nutzer.class), "Name", "Beschreibung", 42, "9238472"); //echtes konto ist wichtig für verknüpfung
+		 String beschreibung = "Schutzgeld";
+		 String titel = "Titel";
+		 String id = "42";
+		 //mock the data set
+		 TransaktionDataSet mockDataSet = mock(TransaktionDataSet.class);
+		 when(mockDataSet.get("betrag")).thenReturn(betrag);
+		 when(mockDataSet.get("datum")).thenReturn(datum);
+		 when(mockDataSet.get("ersteller")).thenReturn(ersteller);
+		 when(mockDataSet.get("zielKonto")).thenReturn(zielKonto);
+		 when(mockDataSet.get("beschreibung")).thenReturn(beschreibung);
+		 when(mockDataSet.get("titel")).thenReturn(titel);
+		 when(mockDataSet.getClassType()).thenReturn(ClassType.TRANSAKTION);
+		 when(mockDataSet.get("id")).thenReturn(id);
+		 when(mockDataSet.hasKey("id")).thenReturn(true);
+		 //add and create transaktion
+		 sp.createAndAddTransaktion(mockDataSet);
+		 
+		 //check that ausgefuehrt ist true
+		 Transaktion t1 = (Transaktion) sp.getObject(ClassType.TRANSAKTION, id);	
+		 assertFalse(t1.isAusgefuehrt());
+		 sp.updateTrVw(datum);
+		 assertTrue(t1.isAusgefuehrt());
+	}
+	
 	
 	
 }
