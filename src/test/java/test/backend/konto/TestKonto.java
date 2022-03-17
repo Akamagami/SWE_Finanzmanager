@@ -50,7 +50,7 @@ public class TestKonto {
 		assertTrue(testKonto.removeMitglied(testNutzer3));
 		assertFalse(testKonto.nutzerIstMitglied(testNutzer2));
 		assertFalse(testKonto.nutzerIstMitglied(testNutzer3));
-		assertEquals(testKonto.getMitgliedList().size(), 2);
+		assertEquals(testKonto.getMitgliedList().size(), 1);
 		// remove 1 -> shouldnt work da mann den ersteller nicht ändern kann
 		assertFalse(testKonto.removeMitglied(testNutzer1));
 		assertTrue(testKonto.nutzerIstMitglied(testNutzer1));
