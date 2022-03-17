@@ -43,7 +43,12 @@ public class Speicher {
 
 	public Object getObject(ClassType type, String id) {//holt ein objekt je nach class type und id
 		Optional ret = emList.get(type).get(id);
-		return ret.get();
+		if(ret.isPresent()) {
+			return ret.get();
+		} else {
+			return null;
+		}
+		
 	}
 
 	public List<Object> getAll(ClassType type) {//gibt alle object eines class types zur�ck
@@ -89,10 +94,10 @@ public class Speicher {
 		dataAdapter.readAndLoad(this);
 	}
 	/*--------------------------------------------------------------------------------------------------------------*/
-	public Transaktion createAndAddTransaktion(TransaktionDataSet dataSet,Optional<String> optId) {
+	private Transaktion createAndAddTransaktion(TransaktionDataSet dataSet,Optional<String> optId) {
 		Transaktion ret = (Transaktion) this.createObject(dataSet,optId);
 		trVw.addTransaktion(ret);
-		trVw.update();
+		//trVw.update();
 		return ret;
 	}
 	public Transaktion createAndAddTransaktion(TransaktionDataSet dataSet) {
