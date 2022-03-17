@@ -14,21 +14,22 @@ import com.example.swe_finanzmanager.backend.nutzer.Nutzer;
 public class TestTransaktion {
 	@Test
 	public void testSetAndGetObsolet() {
-		//normaler Konstrukter anstatt factory
-		Transaktion testTransaktion = new Transaktion (2323.0, mock(Date.class),mock(Nutzer.class),mock(Konto.class),"Beschreibung","titel","834329");
-		
+		// normaler Konstrukter anstatt factory
+		Transaktion testTransaktion = new Transaktion(2323.0, mock(Date.class), mock(Nutzer.class), mock(Konto.class),
+				"Beschreibung", "titel", "834329");
+
 		Konto testKonto = mock(Konto.class);
-		//now zielKonto is not the testKonto
+		// now zielKonto is not the testKonto
 		assertNotEquals(testTransaktion.getZielKonto(), testKonto);
-		//now we set zielKonto to TestKonto	
+		// now we set zielKonto to TestKonto
 		testTransaktion.setZielKonto(testKonto);
 		assertEquals(testTransaktion.getZielKonto(), testKonto);
-		//test booleans
+		// test booleans
 		assertFalse(testTransaktion.isAusgefuehrt());
 		assertFalse(testTransaktion.isObsolet());
-		//change obsolet
+		// change obsolet
 		testTransaktion.setObsolet(true);
 		assertTrue(testTransaktion.isObsolet());
 	}
-	
+
 }

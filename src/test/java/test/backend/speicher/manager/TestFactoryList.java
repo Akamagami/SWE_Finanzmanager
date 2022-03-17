@@ -12,7 +12,7 @@ public class TestFactoryList {
 	@Test
 	public void getAllClassTypeEntityManager() {
 		FactoryList testFactoryList = new FactoryList();
-		for(ClassType t:ClassType.values()) {
+		for (ClassType t : ClassType.values()) {
 			assertTrue(testFactoryList.get(t) instanceof ElementFactory);
 		}
 	}

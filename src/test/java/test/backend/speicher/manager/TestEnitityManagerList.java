@@ -12,7 +12,7 @@ public class TestEnitityManagerList {
 	@Test
 	public void getAllClassTypeEntityManager() {
 		EntityManagerList testEmList = new EntityManagerList();
-		for(ClassType t:ClassType.values()) {
+		for (ClassType t : ClassType.values()) {
 			assertTrue(testEmList.get(t) instanceof EntityManager);
 		}
 	}

@@ -60,7 +60,8 @@ public class TestTransaktionFactory {
 		boolean ausgefuehrt = false;
 		boolean obsolet = false;
 		// mock the data set
-		DataSet mockDataSet = createMockTransaktionDataSetWithExtraValues(betrag, datum, ersteller, zielKonto, beschreibung, titel, ausgefuehrt, obsolet);
+		DataSet mockDataSet = createMockTransaktionDataSetWithExtraValues(betrag, datum, ersteller, zielKonto,
+				beschreibung, titel, ausgefuehrt, obsolet);
 
 		// create Object
 		ElementFactory testFactory = new TransaktionFactory();
@@ -116,6 +117,7 @@ public class TestTransaktionFactory {
 		when(mockDataSet.hasKey("obsolet")).thenReturn(true);
 		return mockDataSet;
 	}
+
 	private void assertEqualsAllDataSetValuesForTransaktion(Transaktion testTransaktion, DataSet mockDataSet) {
 		assertEquals(testTransaktion.getBetrag(), mockDataSet.get("betrag"));
 		assertEquals(testTransaktion.getDatum(), mockDataSet.get("datum"));
@@ -123,12 +125,12 @@ public class TestTransaktionFactory {
 		assertEquals(testTransaktion.getZielKonto(), mockDataSet.get("zielKonto"));
 		assertEquals(testTransaktion.getBeschreibung(), mockDataSet.get("beschreibung"));
 		assertEquals(testTransaktion.getTitel(), mockDataSet.get("titel"));
-		if(mockDataSet.hasKey("obsolet")) {
-			assertEquals(testTransaktion.isObsolet(),mockDataSet.get("obsolet"));
+		if (mockDataSet.hasKey("obsolet")) {
+			assertEquals(testTransaktion.isObsolet(), mockDataSet.get("obsolet"));
 		}
-		if(mockDataSet.hasKey("ausgefuehrt")) {
-			assertEquals(testTransaktion.isAusgefuehrt(),mockDataSet.get("ausgefuehrt"));
+		if (mockDataSet.hasKey("ausgefuehrt")) {
+			assertEquals(testTransaktion.isAusgefuehrt(), mockDataSet.get("ausgefuehrt"));
 		}
-		
+
 	}
 }

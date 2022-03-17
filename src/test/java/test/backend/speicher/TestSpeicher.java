@@ -34,10 +34,7 @@ public class TestSpeicher {
 		int icon = 42;
 		int objectCount = 10;
 		// mock the data set
-		DataSet mockDataSet = mock(NutzerDataSet.class);
-		when(mockDataSet.get("vorname")).thenReturn(vorname);
-		when(mockDataSet.get("nachname")).thenReturn(nachname);
-		when(mockDataSet.getClassType()).thenReturn(ClassType.NUTZER);
+		DataSet mockDataSet = createMockNutzerDataSet(vorname, nachname, icon);
 		// create Object
 
 		for (int i = 1; i <= objectCount; i++) {
@@ -67,11 +64,7 @@ public class TestSpeicher {
 
 		int id = 44;
 		// mock the data set
-		DataSet mockDataSet = mock(NutzerDataSet.class);
-		when(mockDataSet.get("vorname")).thenReturn(vorname);
-		when(mockDataSet.get("nachname")).thenReturn(nachname);
-		when(mockDataSet.get("icon")).thenReturn(icon);
-		when(mockDataSet.getClassType()).thenReturn(ClassType.NUTZER);
+		DataSet mockDataSet = createMockNutzerDataSet(vorname, nachname, icon);
 		when(mockDataSet.get("id")).thenReturn(id + "");
 		when(mockDataSet.hasKey("id")).thenReturn(true);
 		// create the object
@@ -94,65 +87,78 @@ public class TestSpeicher {
 	 */
 	@Test
 	public void testAddingTransaktion() {
-		 //speicher instanz
-		 Speicher sp = new Speicher();
-		 //data
-		 double betrag = 122;
-		 Date datum = Date.valueOf("1990-04-04"); //past transaktion
-		 Nutzer ersteller = mock(Nutzer.class);
-		 Konto zielKonto = new Konto(200, mock(Nutzer.class), "Name", "Beschreibung", 42, "9238472"); //echtes konto ist wichtig für verknüpfung
-		 String beschreibung = "Schutzgeld";
-		 String titel = "Titel";
-		 //mock the data set
-		 TransaktionDataSet mockDataSet = mock(TransaktionDataSet.class);
-		 when(mockDataSet.get("betrag")).thenReturn(betrag);
-		 when(mockDataSet.get("datum")).thenReturn(datum);
-		 when(mockDataSet.get("ersteller")).thenReturn(ersteller);
-		 when(mockDataSet.get("zielKonto")).thenReturn(zielKonto);
-		 when(mockDataSet.get("beschreibung")).thenReturn(beschreibung);
-		 when(mockDataSet.get("titel")).thenReturn(titel);
-		 when(mockDataSet.getClassType()).thenReturn(ClassType.TRANSAKTION);
-		 //add and create transaktion
-		 
-		 sp.createAndAddTransaktion(mockDataSet);
-		 //check that ausgefuehrt ist true
-		 Transaktion t1 = (Transaktion) sp.getObject(ClassType.TRANSAKTION, "1");	
-		 assertTrue(t1.isAusgefuehrt());
+		// speicher instanz
+		Speicher sp = new Speicher();
+		// data
+		double betrag = 122;
+		Date datum = Date.valueOf("1990-04-04"); // past transaktion
+		Nutzer ersteller = mock(Nutzer.class);
+		Konto zielKonto = new Konto(200, mock(Nutzer.class), "Name", "Beschreibung", 42, "9238472"); // echtes konto ist
+																										// wichtig für
+																										// verknüpfung
+		String beschreibung = "Schutzgeld";
+		String titel = "Titel";
+		// mock the data set
+		TransaktionDataSet mockDataSet = createMockTransaktionDataSet(betrag, datum, ersteller, zielKonto, beschreibung,
+				titel);
+		// add and create transaktion
+
+		sp.createAndAddTransaktion(mockDataSet);
+		// check that ausgefuehrt ist true
+		Transaktion t1 = (Transaktion) sp.getObject(ClassType.TRANSAKTION, "1");
+		assertTrue(t1.isAusgefuehrt());
 	}
+
 	@Test
 	public void testAddingFutureTransaktionWithId() {
-		 //speicher instanz
-		 Speicher sp = new Speicher();
-		 //data
-		 double betrag = 122;
-		 Date datum = Date.valueOf("8888-04-04"); //future transaktion
-		 Nutzer ersteller = mock(Nutzer.class);
-		 Konto zielKonto = new Konto(200, mock(Nutzer.class), "Name", "Beschreibung", 42, "9238472"); //echtes konto ist wichtig für verknüpfung
-		 String beschreibung = "Schutzgeld";
-		 String titel = "Titel";
-		 String id = "42";
-		 //mock the data set
-		 TransaktionDataSet mockDataSet = mock(TransaktionDataSet.class);
-		 when(mockDataSet.get("betrag")).thenReturn(betrag);
-		 when(mockDataSet.get("datum")).thenReturn(datum);
-		 when(mockDataSet.get("ersteller")).thenReturn(ersteller);
-		 when(mockDataSet.get("zielKonto")).thenReturn(zielKonto);
-		 when(mockDataSet.get("beschreibung")).thenReturn(beschreibung);
-		 when(mockDataSet.get("titel")).thenReturn(titel);
-		 when(mockDataSet.getClassType()).thenReturn(ClassType.TRANSAKTION);
-		 when(mockDataSet.get("id")).thenReturn(id);
-		 when(mockDataSet.hasKey("id")).thenReturn(true);
-		 //add and create transaktion
-		 sp.createAndAddTransaktion(mockDataSet);
-		 
-		 //check that ausgefuehrt ist true
-		 Transaktion t1 = (Transaktion) sp.getObject(ClassType.TRANSAKTION, id);	
-		 assertFalse(t1.isAusgefuehrt());
-		 //änderung des datums -> transaktion sollte augeführt werden
-		 sp.updateTrVw(datum);
-		 assertTrue(t1.isAusgefuehrt());
+		// speicher instanz
+		Speicher sp = new Speicher();
+		// data
+		double betrag = 122;
+		Date datum = Date.valueOf("8888-04-04"); // future transaktion
+		Nutzer ersteller = mock(Nutzer.class);
+		Konto zielKonto = new Konto(200, mock(Nutzer.class), "Name", "Beschreibung", 42, "9238472"); // echtes konto ist
+																										// wichtig für
+																										// verknüpfung
+		String beschreibung = "Schutzgeld";
+		String titel = "Titel";
+		String id = "42";
+		// mock the data set
+		TransaktionDataSet mockDataSet = createMockTransaktionDataSet(betrag, datum, ersteller, zielKonto, beschreibung,
+				titel);
+		when(mockDataSet.get("id")).thenReturn(id);
+		when(mockDataSet.hasKey("id")).thenReturn(true);
+		// add and create transaktion
+		sp.createAndAddTransaktion(mockDataSet);
+
+		// check that ausgefuehrt ist true
+		Transaktion t1 = (Transaktion) sp.getObject(ClassType.TRANSAKTION, id);
+		assertFalse(t1.isAusgefuehrt());
+		// änderung des datums -> transaktion sollte augeführt werden
+		sp.updateTrVw(datum);
+		assertTrue(t1.isAusgefuehrt());
 	}
-	
-	
-	
+
+	private TransaktionDataSet createMockTransaktionDataSet(double betrag, Date datum, Nutzer ersteller,
+			Konto zielKonto, String beschreibung, String titel) {
+		TransaktionDataSet mockDataSet = mock(TransaktionDataSet.class);
+		when(mockDataSet.get("betrag")).thenReturn(betrag);
+		when(mockDataSet.get("datum")).thenReturn(datum);
+		when(mockDataSet.get("ersteller")).thenReturn(ersteller);
+		when(mockDataSet.get("zielKonto")).thenReturn(zielKonto);
+		when(mockDataSet.get("beschreibung")).thenReturn(beschreibung);
+		when(mockDataSet.get("titel")).thenReturn(titel);
+		when(mockDataSet.getClassType()).thenReturn(ClassType.TRANSAKTION);
+		return mockDataSet;
+	}
+
+	private DataSet createMockNutzerDataSet(String vorname, String nachname, int icon) {
+		DataSet mockDataSet = mock(DataSet.class);
+		when(mockDataSet.get("vorname")).thenReturn(vorname);
+		when(mockDataSet.get("nachname")).thenReturn(nachname);
+		when(mockDataSet.get("icon")).thenReturn(icon);
+		when(mockDataSet.getClassType()).thenReturn(ClassType.NUTZER);
+		return mockDataSet;
+	}
+
 }
