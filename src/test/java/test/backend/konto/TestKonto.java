@@ -66,16 +66,10 @@ public class TestKonto {
 		Konto testKonto = new Konto(initKontostand, mock(Nutzer.class), "Name", "Beschreibung", 42, "9238472");
 		// n paar transaktionen
 
-		Transaktion t1 = mock(Transaktion.class);
-		Transaktion t2 = mock(Transaktion.class);
-		Transaktion t3 = mock(Transaktion.class);// obsolet(aslo kein betrag nötig
+		Transaktion t1 = createMockTransaktion(t1Value, false, true);
+		Transaktion t2 = createMockTransaktion(t2Value, false, true);
+		Transaktion t3 = createMockTransaktion(t3Value, true, true);// obsolet(aslo kein betrag nötig
 
-		when(t1.getBetrag()).thenReturn(t1Value);
-		when(t2.getBetrag()).thenReturn(t2Value);
-		when(t3.getBetrag()).thenReturn(t3Value);
-		when(t1.isObsolet()).thenReturn(false);
-		when(t2.isObsolet()).thenReturn(false);
-		when(t3.isObsolet()).thenReturn(true);
 		// add transaktionen
 		testKonto.addTransaktion(t1);
 		testKonto.addTransaktion(t2);
@@ -84,5 +78,14 @@ public class TestKonto {
 		assertEquals(testKonto.getKontostand(), initKontostand + t1Value + t2Value);
 		assertEquals(testKonto.getInitKontostand(), initKontostand);
 
+	}
+	
+	public Transaktion createMockTransaktion(double betrag, boolean obsolet, boolean ausgefuehrt) {
+		Transaktion ret = mock(Transaktion.class);
+		
+		when(ret.getBetrag()).thenReturn(betrag);
+		when(ret.isObsolet()).thenReturn(obsolet);
+		when(ret.isAusgefuehrt()).thenReturn(ausgefuehrt);
+		return ret;
 	}
 }
