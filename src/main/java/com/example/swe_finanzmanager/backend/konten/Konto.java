@@ -46,7 +46,7 @@ public class Konto implements SavableObject{
 	public void addTransaktion(Transaktion trkn) {
 		tList.add(trkn);
 		trkn.setZielKonto(this);
-		trkn.setAusgefuehrt(true);
+		//trkn.setAusgefuehrt(true);
 	}
 	
 	
@@ -61,7 +61,7 @@ public class Konto implements SavableObject{
 	public double getKontostand() {
 		double aktuellerKontostand = kontostand;
 		for(Transaktion t:tList) {
-			if(!t.isObsolet()) {
+			if(!t.isObsolet() && t.isAusgefuehrt()) {
 				aktuellerKontostand+= t.getBetrag();
 			}
 		}
