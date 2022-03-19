@@ -45,7 +45,7 @@ public class DataSetTest {
 		TransaktionDataSet testSet = new TransaktionDataSet(betrag, datum, ersteller, zielKonto, beschreibung, titel);
 		assertEqualsAllTransaktionDataSetValues(testSet, betrag, datum, ersteller, zielKonto, beschreibung, titel);
 	}
-
+	@Test
 	public void testCreationOfKontoDataSet() {
 		/* Test Value */
 		double kontostand = 232;
