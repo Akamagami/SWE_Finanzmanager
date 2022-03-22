@@ -29,7 +29,7 @@ public class MainApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("startpage.fxml"));
         fxmlLoader.setController(mainController);
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
-        stage.setTitle("Hello!");
+        stage.setTitle("Nutzer wählen");
         stage.setScene(scene);
         stage.show();
     }

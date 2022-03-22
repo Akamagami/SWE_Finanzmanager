@@ -16,11 +16,13 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.PopupWindow;
+import javafx.stage.Stage;
 
 public class MasterdetailController {
 
     private Nutzer currentNutzer;
     private UIUtils uiUtils;
+    private Stage stage;
 
     @FXML
     AnchorPane masterdetailAP;
@@ -35,6 +37,9 @@ public class MasterdetailController {
     Pane detailpage;
 
     public void build() {
+        System.out.println("Build new Mastedetail!");
+        stage.setTitle(currentNutzer.getName().fullName());
+        masterdetailListView.getItems().clear();
         ObservableList<Konto> kontenObservableList = FXCollections.observableList(uiUtils.getNutzerKonten(currentNutzer));
         masterdetailListView.setCellFactory(new KontoCellFactory());
         masterdetailListView.setItems(kontenObservableList);
@@ -99,5 +104,9 @@ public class MasterdetailController {
 
     public void setUiUtils(UIUtils uiUtils) {
         this.uiUtils = uiUtils;
+    }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
     }
 }
