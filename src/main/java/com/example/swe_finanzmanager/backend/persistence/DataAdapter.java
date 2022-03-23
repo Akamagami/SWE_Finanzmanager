@@ -2,9 +2,22 @@ package com.example.swe_finanzmanager.backend.persistence;
 
 import com.example.swe_finanzmanager.backend.speicher.Speicher;
 
-public interface DataAdapter {
+public abstract class DataAdapter {
 
-	public void writeAndSave(Speicher sp);
-	public void readAndLoad(Speicher sp);
+	String path = "finanzmanagerData";
+	
+	public void writeAndSave(Speicher sp) {
+		this.write(path, sp);
+	}
+	public void readAndLoad(Speicher sp) {
+		this.read(path, sp);
+	}
+	
+	protected void write(String path,Speicher sp) {
+		
+	}
+	protected void read(String path, Speicher sp) {
+		
+	}
 	
 }
