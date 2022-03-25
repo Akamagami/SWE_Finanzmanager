@@ -2,29 +2,23 @@ package com.example.swe_finanzmanager.backend.persistence;
 
 import com.example.swe_finanzmanager.backend.speicher.Speicher;
 
-public class XMLAdapter implements DataAdapter {
+public class XMLAdapter extends DataAdapter {
 
-	private String path =  "data.xml";
-	
-	private XMLWriter writer = new XMLWriter(path);
-	private XMLReader reader = new XMLReader(path);
-	
-	
+	String endPath = ".xml";
 	
 	public XMLAdapter() {
 		
 	}
-
 	@Override
-	public void writeAndSave(Speicher sp) {
-		writer.writeAndSave(sp);
-		
+	protected void write(String path,Speicher sp) {
+		 XMLWriter writer = new XMLWriter(path+""+endPath);
+		 writer.writeAndSave(sp);
 	}
-
 	@Override
-	public void readAndLoad(Speicher sp) {
+	protected void read(String path, Speicher sp) {
+		XMLReader reader = new XMLReader(path+""+endPath);
 		reader.readAndLoad(sp);
-		
 	}
+
 	
 }

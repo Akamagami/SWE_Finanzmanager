@@ -76,9 +76,19 @@ public class Konto implements SavableObject{
 	}
 
 	public ArrayList<Transaktion> gettList() {
-		return tList;
+		ArrayList<Transaktion> ret = new ArrayList<Transaktion>();
+		for(Transaktion t:tList) {
+			if(!t.isObsolet()) {
+				ret.add(t);
+			}
+		}
+		return ret;
 	}
 
+	public ArrayList<Transaktion> getCompleteTList(){
+		return tList;
+
+	}
 	public String getName() {
 		return name;
 	}
