@@ -2,6 +2,9 @@ package com.example.swe_finanzmanager.backend.speicher;
 
 import com.example.swe_finanzmanager.backend.konten.Transaktion;
 
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +34,7 @@ public class UIUtils {
 		sp = new Speicher();
 		sp.setDataAdapter(new XMLAdapter());
 		this.load();
+		sp.updateTrVw(Date.valueOf(LocalDate.now()));	
 	}
 	
 	
