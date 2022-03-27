@@ -4,12 +4,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import com.example.swe_finanzmanager.backend.konten.Konto;
 import com.example.swe_finanzmanager.backend.konten.Transaktion;
 import com.example.swe_finanzmanager.backend.manager.TransaktionEntityManager;
+import com.example.swe_finanzmanager.backend.nutzer.Nutzer;
 import com.example.swe_finanzmanager.backend.speicher.EntityManager;
 
 public class TestTransaktionManager {
@@ -32,17 +35,17 @@ public class TestTransaktionManager {
 	@Test
 	public void addAndDeleteTransaktion() {
 		EntityManager testManager = new TransaktionEntityManager();
-		// create mock Transaktions
-		Transaktion mockTransaktion1 = mock(Transaktion.class);
-		when(mockTransaktion1.getId()).thenReturn("1");
+		// create real Transaktion to check obsolete function
+		Transaktion t1 = new Transaktion(232.0, mock(Date.class), mock(Nutzer.class), mock(Konto.class), "Beschreibung", "titel",
+				"1");
 		// save mock Transaktions
-		testManager.save(mockTransaktion1);
+		testManager.save(t1);
 		// check that Transaktion is there
 		assertTrue(testManager.get("1").isPresent());
 		// delete Transaktion from manager
 		testManager.delete("1");
-		// check that Transaktion is gone
-		assertTrue(testManager.get("1").isEmpty());
+		// check that Transaktion is obsolete
+		assertTrue(((Transaktion) testManager.get("1").get()).isObsolet());
 	}
 
 	@Test
