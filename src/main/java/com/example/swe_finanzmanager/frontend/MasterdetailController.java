@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.geometry.Side;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuButton;
@@ -37,9 +38,10 @@ public class MasterdetailController {
     Pane detailpage;
 
     public void build() {
-        System.out.println("Build new Mastedetail!");
+        System.out.println("Build new Masterdetail!");
         stage.setTitle(currentNutzer.getName().fullName());
         masterdetailListView.getItems().clear();
+        System.out.println(uiUtils.getNutzerKonten(currentNutzer));
         ObservableList<Konto> kontenObservableList = FXCollections.observableList(uiUtils.getNutzerKonten(currentNutzer));
         masterdetailListView.setCellFactory(new KontoCellFactory());
         masterdetailListView.setItems(kontenObservableList);
@@ -76,6 +78,7 @@ public class MasterdetailController {
         changeNutzer.setPrefHeight(40);
         changeNutzer.setPrefWidth(200);
         changeNutzer.setVisible(true);
+        changeNutzer.setPopupSide(Side.TOP);
         masterdetailAP.getChildren().add(changeNutzer);
         AnchorPane.setBottomAnchor(changeNutzer, 5.0);
         AnchorPane.setLeftAnchor(changeNutzer, 5.0);
@@ -83,6 +86,7 @@ public class MasterdetailController {
 
 
         detailpageController.setCurrentKonto(uiUtils.getNutzerKonten(currentNutzer).get(0));
+        detailpageController.build();
     }
 
     public void clear() {
