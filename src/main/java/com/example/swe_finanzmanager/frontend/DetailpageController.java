@@ -5,9 +5,12 @@ import com.example.swe_finanzmanager.backend.konten.Transaktion;
 import com.example.swe_finanzmanager.backend.nutzer.Nutzer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.GridPane;
@@ -70,10 +73,19 @@ public class DetailpageController {
 
         GridPane mitgliederPane = new GridPane();
         Label mitgliederLabel = new Label("Mitglieder");
+        Button mitgliederAddButton = new Button("Mitglieder hinzufügen");
+        mitgliederAddButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+
+            }
+        });
+
         ListView mitgliederListView = new ListView();
         mitgliederListView.setMaxSize(220, 140);
         mitgliederPane.add(mitgliederLabel, 0, 0);
         mitgliederPane.add(mitgliederListView, 0, 1);
+        mitgliederPane.add(mitgliederAddButton, 0, 2);
         gridPane.add(mitgliederPane, 1, 1);
         ObservableList<Nutzer> mitgliederObservableList = FXCollections.observableList(currentKonto.getMitgliedList());
         mitgliederListView.setCellFactory(new MitgliederCellFactory());
@@ -85,6 +97,11 @@ public class DetailpageController {
         GridPane.setMargin(infoPane, new Insets(5));
         GridPane.setMargin(transaktionsPane, new Insets(10));
         GridPane.setMargin(mitgliederPane, new Insets(10));
+    }
+
+    public void buildEmpty() {
+        Label missingKontenInfo = new Label("Dieser Nutzer hat noch kein Konto eingerichtet!");
+        gridPane.add(missingKontenInfo, 3, 3);
     }
 
     public void clear() {

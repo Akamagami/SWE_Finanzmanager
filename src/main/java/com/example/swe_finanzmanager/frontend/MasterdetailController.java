@@ -38,22 +38,12 @@ public class MasterdetailController {
     Pane detailpage;
 
     public void build() {
+        clear();
         System.out.println("Build new Masterdetail!");
         stage.setTitle(currentNutzer.getName().fullName());
         masterdetailListView.getItems().clear();
         System.out.println(uiUtils.getNutzerKonten(currentNutzer));
-        ObservableList<Konto> kontenObservableList = FXCollections.observableList(uiUtils.getNutzerKonten(currentNutzer));
-        masterdetailListView.setCellFactory(new KontoCellFactory());
-        masterdetailListView.setItems(kontenObservableList);
-        masterdetailListView.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                Konto selectedKonto = (Konto) masterdetailListView.getSelectionModel().getSelectedItem();
-                detailpageController.setCurrentKonto(selectedKonto);
-                detailpageController.build();
-            }
-        });
-        masterdetailListView.refresh();
+
         masterdetailListView.setPrefHeight(1270.0);
         AnchorPane.setTopAnchor(masterdetailListView, 3.0);
         AnchorPane.setLeftAnchor(masterdetailListView, 4.0);
@@ -79,14 +69,30 @@ public class MasterdetailController {
         changeNutzer.setPrefWidth(200);
         changeNutzer.setVisible(true);
         changeNutzer.setPopupSide(Side.TOP);
-        masterdetailAP.getChildren().add(changeNutzer);
         AnchorPane.setBottomAnchor(changeNutzer, 5.0);
         AnchorPane.setLeftAnchor(changeNutzer, 5.0);
 
+        try {
+            ObservableList<Konto> kontenObservableList = FXCollections.observableList(uiUtils.getNutzerKonten(currentNutzer));
+            masterdetailListView.setCellFactory(new KontoCellFactory());
+            masterdetailListView.setItems(kontenObservableList);
+            masterdetailListView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    Konto selectedKonto = (Konto) masterdetailListView.getSelectionModel().getSelectedItem();
+                    detailpageController.setCurrentKonto(selectedKonto);
+                    detailpageController.build();
+                }
+            });
+            masterdetailListView.refresh();
+            detailpageController.setCurrentKonto(uiUtils.getNutzerKonten(currentNutzer).get(0));
+            detailpageController.build();
+        } catch (Exception e) {
+            System.out.println(e);
+            detailpageController.buildEmpty();
+        }
 
-
-        detailpageController.setCurrentKonto(uiUtils.getNutzerKonten(currentNutzer).get(0));
-        detailpageController.build();
+        masterdetailAP.getChildren().add(changeNutzer);
     }
 
     public void clear() {
