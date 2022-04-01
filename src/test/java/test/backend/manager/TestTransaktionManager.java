@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.List;
 
@@ -36,7 +37,7 @@ public class TestTransaktionManager {
 	public void addAndDeleteTransaktion() {
 		EntityManager testManager = new TransaktionEntityManager();
 		// create real Transaktion to check obsolete function
-		Transaktion t1 = new Transaktion(232.0, mock(Date.class), mock(Nutzer.class), mock(Konto.class), "Beschreibung", "titel",
+		Transaktion t1 = new Transaktion(new BigDecimal("323"), mock(Date.class), mock(Nutzer.class), mock(Konto.class), "Beschreibung", "titel",
 				"1");
 		// save mock Transaktions
 		testManager.save(t1);

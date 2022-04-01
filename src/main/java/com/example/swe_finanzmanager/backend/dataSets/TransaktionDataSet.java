@@ -1,5 +1,6 @@
 package com.example.swe_finanzmanager.backend.dataSets;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 
 import com.example.swe_finanzmanager.backend.konten.Konto;
@@ -9,7 +10,7 @@ import com.example.swe_finanzmanager.constants.ClassType;
 
 public class TransaktionDataSet extends DataSet {
 
-	public TransaktionDataSet(double betrag, Date datum, Nutzer ersteller, Konto zielKonto, String beschreibung, String titel) {
+	public TransaktionDataSet(BigDecimal betrag, Date datum, Nutzer ersteller, Konto zielKonto, String beschreibung, String titel) {
 		super(ClassType.TRANSAKTION);
 		this.addKey("betrag",betrag);
 		this.addKey("datum",datum);

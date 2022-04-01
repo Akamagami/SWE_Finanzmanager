@@ -1,5 +1,6 @@
 package com.example.swe_finanzmanager.backend.factories;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,7 +37,7 @@ public class KontoFactory implements ElementFactory{
 			index++;
 		}
 		
-		Konto ret= new Konto((double) dataSet.get("kontostand"),
+		Konto ret= new Konto((BigDecimal) dataSet.get("kontostand"),
 							(Nutzer) dataSet.get("ersteller"), 
 							(String) dataSet.get("name"),
 							(String) dataSet.get("beschreibung"),
