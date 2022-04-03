@@ -25,7 +25,7 @@ public class TransaktionEntityManager implements EntityManager<Transaktion> {
 
 	@Override
 	public void delete(String id) {
-		list.remove(id);
+		list.get(id).setObsolet(true);
 
 	}
 
