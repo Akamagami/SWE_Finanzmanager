@@ -1,24 +1,13 @@
 package com.example.swe_finanzmanager;
 
-import com.example.swe_finanzmanager.backend.dataSets.KontoDataSet;
-import com.example.swe_finanzmanager.backend.dataSets.NutzerDataSet;
-import com.example.swe_finanzmanager.backend.dataSets.TransaktionDataSet;
-import com.example.swe_finanzmanager.backend.konten.Konto;
-import com.example.swe_finanzmanager.backend.nutzer.Nutzer;
-import com.example.swe_finanzmanager.backend.persistence.XMLAdapter;
-import com.example.swe_finanzmanager.backend.speicher.DataSet;
-import com.example.swe_finanzmanager.backend.speicher.Speicher;
 import com.example.swe_finanzmanager.backend.speicher.UIUtils;
-import com.example.swe_finanzmanager.constants.ClassType;
-import com.example.swe_finanzmanager.frontend.MainController;
+import com.example.swe_finanzmanager.frontend.controller.MainController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.sql.Date;
-import java.util.List;
 
 public class MainApplication extends Application {
 

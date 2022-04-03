@@ -1,23 +1,19 @@
-package com.example.swe_finanzmanager.frontend;
+package com.example.swe_finanzmanager.frontend.controller;
 
 import com.example.swe_finanzmanager.MainApplication;
 import com.example.swe_finanzmanager.backend.nutzer.Nutzer;
-import com.example.swe_finanzmanager.backend.speicher.Speicher;
 import com.example.swe_finanzmanager.backend.speicher.UIUtils;
-import com.example.swe_finanzmanager.constants.ClassType;
+import com.example.swe_finanzmanager.frontend.cellfactories.NutzerCellFactory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
@@ -41,10 +37,10 @@ public class MainController {
         FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource("masterdetail.fxml"));
         MasterdetailController masterdetailController = new MasterdetailController();
         masterdetailController.setCurrentNutzer(selectedNutzer);
-        masterdetailController.setUiUtils(uiUtils);
+        masterdetailController.addUIUtils(uiUtils);
 
         loader.setController(masterdetailController);
-        Scene masterDetailScene = new Scene(loader.load(), 1280, 720);
+        Scene masterDetailScene = new Scene(loader.load(), 1000, 500);
 
         Stage stage = (Stage) root.getScene().getWindow();
         stage.setScene(masterDetailScene);

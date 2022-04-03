@@ -13,6 +13,8 @@ module com.example.swe_finanzmanager {
 	
     opens com.example.swe_finanzmanager to javafx.fxml;
     exports com.example.swe_finanzmanager;
-    exports com.example.swe_finanzmanager.frontend;
-    opens com.example.swe_finanzmanager.frontend to javafx.fxml;
+    exports com.example.swe_finanzmanager.frontend.controller;
+    opens com.example.swe_finanzmanager.frontend.controller to javafx.fxml;
+    exports com.example.swe_finanzmanager.frontend.cellfactories;
+    opens com.example.swe_finanzmanager.frontend.cellfactories to javafx.fxml;
 }

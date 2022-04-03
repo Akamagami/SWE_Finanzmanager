@@ -1,4 +1,4 @@
-package com.example.swe_finanzmanager.frontend;
+package com.example.swe_finanzmanager.frontend.cellfactories;
 
 import com.example.swe_finanzmanager.backend.konten.Konto;
 import com.example.swe_finanzmanager.backend.nutzer.Nutzer;
