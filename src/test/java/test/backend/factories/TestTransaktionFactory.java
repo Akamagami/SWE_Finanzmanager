@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.Optional;
 
@@ -31,7 +32,7 @@ public class TestTransaktionFactory {
 	@Test
 	public void testTransaktionCreationWithoutId() {
 		// Object Values
-		double betrag = 122;
+		BigDecimal betrag = new BigDecimal("123");
 		Date datum = Date.valueOf("2020-11-10");
 		Nutzer ersteller = mock(Nutzer.class);
 		Konto zielKonto = mock(Konto.class);
@@ -50,7 +51,7 @@ public class TestTransaktionFactory {
 	@Test
 	public void testTransaktionCreationWithIdAndValues() {
 		// Object Values
-		double betrag = 122;
+		BigDecimal betrag = new BigDecimal("123");
 		Date datum = Date.valueOf("2020-11-10");
 		Nutzer ersteller = mock(Nutzer.class);
 		Konto zielKonto = mock(Konto.class);
@@ -75,7 +76,7 @@ public class TestTransaktionFactory {
 	@Test
 	public void testTransaktionCreationWithLowerId() {
 		// Object Values
-		double betrag = 122;
+		BigDecimal betrag = new BigDecimal("123");
 		Date datum = Date.valueOf("2020-11-10");
 		Nutzer ersteller = mock(Nutzer.class);
 		Konto zielKonto = mock(Konto.class);
@@ -95,7 +96,7 @@ public class TestTransaktionFactory {
 		assertEquals(testFactory.getIndex(), newIndex);
 	}
 
-	private DataSet createMockTransaktionDataSet(double betrag, Date datum, Nutzer ersteller, Konto zielKonto,
+	private DataSet createMockTransaktionDataSet(BigDecimal betrag, Date datum, Nutzer ersteller, Konto zielKonto,
 			String beschreibung, String titel) {
 		DataSet mockDataSet = mock(DataSet.class);
 		when(mockDataSet.get("betrag")).thenReturn(betrag);
@@ -107,7 +108,7 @@ public class TestTransaktionFactory {
 		return mockDataSet;
 	}
 
-	private DataSet createMockTransaktionDataSetWithExtraValues(double betrag, Date datum, Nutzer ersteller,
+	private DataSet createMockTransaktionDataSetWithExtraValues(BigDecimal betrag, Date datum, Nutzer ersteller,
 			Konto zielKonto, String beschreibung, String titel, boolean ausgefuehrt, boolean obsolet) {
 		DataSet mockDataSet = createMockTransaktionDataSet(betrag, datum, ersteller, zielKonto, beschreibung, titel);
 		when(mockDataSet.get("ausgefuehrt")).thenReturn(ausgefuehrt);

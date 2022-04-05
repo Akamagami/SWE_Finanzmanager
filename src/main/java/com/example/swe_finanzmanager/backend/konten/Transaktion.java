@@ -1,5 +1,6 @@
 package com.example.swe_finanzmanager.backend.konten;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 
 import com.example.swe_finanzmanager.backend.dataSets.TransaktionDataSet;
@@ -9,7 +10,7 @@ import com.example.swe_finanzmanager.backend.speicher.SavableObject;
 
 public class Transaktion implements SavableObject {
 
-	private double betrag;
+	private BigDecimal betrag;
 	private Date datum;
 	private boolean obsolet;
 	private String beschreibung;
@@ -20,7 +21,7 @@ public class Transaktion implements SavableObject {
 	private Nutzer ersteller;
 	private Konto zielKonto;
 	
-	public Transaktion(double betrag, Date datum, Nutzer ersteller, Konto zielKonto,String beschreibung, String titel,String id) {
+	public Transaktion(BigDecimal betrag, Date datum, Nutzer ersteller, Konto zielKonto,String beschreibung, String titel,String id) {
 		super();
 		this.betrag = betrag;
 		this.datum = datum;
@@ -63,7 +64,7 @@ public class Transaktion implements SavableObject {
 		this.obsolet = obsolet;
 	}
 
-	public double getBetrag() {
+	public BigDecimal getBetrag() {
 		return betrag;
 	}
 

@@ -3,6 +3,7 @@ package test.backend.konto;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 
 import org.junit.jupiter.api.Test;
@@ -18,9 +19,9 @@ public class TestTransaktionverwaltung {
 		Date present = Date.valueOf("2020-11-11");
 		Date past = Date.valueOf("2020-10-11");
 
-		double t1Value = 32;
+		BigDecimal t1Value = new BigDecimal("23");
 		// echtes Konto, das verknüpfung wichtig ist
-		Konto testKonto = new Konto(200, mock(Nutzer.class), "Name", "Beschreibung", 42, "9238472");
+		Konto testKonto = new Konto(new BigDecimal("200"), mock(Nutzer.class), "Name", "Beschreibung", 42, "9238472");
 
 		Transaktion t1 = new Transaktion(t1Value, past, mock(Nutzer.class), testKonto, "Beschreibung", "titel",
 				"834329");
@@ -31,10 +32,10 @@ public class TestTransaktionverwaltung {
 		// nun sollte t1 ausgefürt sein, und der Konostand von TestKonto um t1Value
 		// erhöht
 		assertTrue(t1.isAusgefuehrt());
-		assertEquals(testKonto.getKontostand(), testKonto.getInitKontostand() + t1.getBetrag());
+		assertEquals(testKonto.getKontostand(), testKonto.getInitKontostand().add(t1.getBetrag()));
 		// erneutes hinzufügen der Transaktion ändert nichts
 		tvw.addTransaktion(t1);
-		assertEquals(testKonto.getKontostand(), testKonto.getInitKontostand() + t1.getBetrag());
+		assertEquals(testKonto.getKontostand(), testKonto.getInitKontostand().add(t1.getBetrag()));
 		// transaktion tu obsolet, Kontostand sollte = init Kontostand sein
 		t1.setObsolet(true);
 		assertEquals(testKonto.getKontostand(), testKonto.getInitKontostand());
@@ -45,9 +46,9 @@ public class TestTransaktionverwaltung {
 		Date present = Date.valueOf("2020-11-11");
 		Date future = Date.valueOf("2020-12-11");
 
-		double t1Value = 32;
+		BigDecimal t1Value = new BigDecimal("23");
 		// echtes Konto, das verknüpfung wichtig ist
-		Konto testKonto = new Konto(200, mock(Nutzer.class), "Name", "Beschreibung", 42, "9238472");
+		Konto testKonto = new Konto(new BigDecimal("200"), mock(Nutzer.class), "Name", "Beschreibung", 42, "9238472");
 
 		Transaktion t1 = new Transaktion(t1Value, future, mock(Nutzer.class), testKonto, "Beschreibung", "titel",
 				"834329");
@@ -62,7 +63,7 @@ public class TestTransaktionverwaltung {
 		// ändern der Zeit, nun sollte die Transaktion ausgeführt sein
 		tvw.update(future);
 		assertTrue(t1.isAusgefuehrt());
-		assertEquals(testKonto.getKontostand(), testKonto.getInitKontostand() + t1.getBetrag());
+		assertEquals(testKonto.getKontostand(), testKonto.getInitKontostand().add(t1.getBetrag()));
 
 	}
 

@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
 
+import java.math.BigDecimal;
+
 import org.junit.jupiter.api.Test;
 
 import com.example.swe_finanzmanager.backend.konten.Konto;
@@ -20,7 +22,7 @@ public class TestKonto {
 		Nutzer testNutzer3 = mock(Nutzer.class);
 
 		// using normal Konstruktor instead of factory
-		Konto testKonto = new Konto(200, testNutzer1, "Name", "Beschreibung", 42, "9238472");
+		Konto testKonto = new Konto(new BigDecimal("200"), testNutzer1, "Name", "Beschreibung", 42, "9238472");
 		// adding ersteller again to make sure count does not change
 		testKonto.addMitglied(testNutzer1);
 		assertEquals(testKonto.getMitgliedList().size(), 1);
@@ -42,7 +44,7 @@ public class TestKonto {
 		Nutzer testNutzer3 = mock(Nutzer.class);
 
 		// using normal Konstruktor instead of factory
-		Konto testKonto = new Konto(200, testNutzer1, "Name", "Beschreibung", 42, "9238472");
+		Konto testKonto = new Konto(new BigDecimal("200"), testNutzer1, "Name", "Beschreibung", 42, "9238472");
 		testKonto.addMitglied(testNutzer2);
 		testKonto.addMitglied(testNutzer3);
 		// remove 3 and 2
@@ -58,10 +60,10 @@ public class TestKonto {
 
 	@Test
 	public void testKontostandRechnung() {
-		double initKontostand = 3209;
-		double t1Value = 33;
-		double t2Value = 44;
-		double t3Value = 55;
+		BigDecimal initKontostand = new BigDecimal("200");
+		BigDecimal t1Value = new BigDecimal("22");
+		BigDecimal t2Value = new BigDecimal("33");
+		BigDecimal t3Value = new BigDecimal("44");
 
 		Konto testKonto = new Konto(initKontostand, mock(Nutzer.class), "Name", "Beschreibung", 42, "9238472");
 		// n paar transaktionen
@@ -75,12 +77,12 @@ public class TestKonto {
 		testKonto.addTransaktion(t2);
 		testKonto.addTransaktion(t3);
 		// check kontostand value
-		assertEquals(testKonto.getKontostand(), initKontostand + t1Value + t2Value);
+		assertEquals(testKonto.getKontostand(), initKontostand.add(t1Value.add(t2Value)));
 		assertEquals(testKonto.getInitKontostand(), initKontostand);
 
 	}
 	
-	public Transaktion createMockTransaktion(double betrag, boolean obsolet, boolean ausgefuehrt) {
+	public Transaktion createMockTransaktion(BigDecimal betrag, boolean obsolet, boolean ausgefuehrt) {
 		Transaktion ret = mock(Transaktion.class);
 		
 		when(ret.getBetrag()).thenReturn(betrag);

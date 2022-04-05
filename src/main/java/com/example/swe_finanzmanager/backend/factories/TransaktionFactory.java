@@ -1,6 +1,7 @@
 package com.example.swe_finanzmanager.backend.factories;
 
 
+import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.Optional;
 
@@ -37,7 +38,7 @@ public class TransaktionFactory implements ElementFactory {
 			newIndex = index+"";
 			index++;
 		}
-		Transaktion ret= new Transaktion((double) dataSet.get("betrag"),
+		Transaktion ret= new Transaktion((BigDecimal) dataSet.get("betrag"),
 							(Date) dataSet.get("datum"), 
 							(Nutzer) dataSet.get("ersteller"),
 							(Konto) dataSet.get("zielKonto"),

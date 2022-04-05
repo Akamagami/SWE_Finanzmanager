@@ -1,5 +1,6 @@
 package com.example.swe_finanzmanager.backend.konten;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.ArrayList;
 
@@ -10,7 +11,7 @@ import com.example.swe_finanzmanager.backend.speicher.SavableObject;
 
 public class Konto implements SavableObject{
 
-	private double kontostand;	//initialer Kontostand wird nie ge�ndert
+	private BigDecimal kontostand;	//initialer Kontostand wird nie ge�ndert
 	//private Date datum;
 	private Nutzer ersteller;
 	
@@ -24,7 +25,7 @@ public class Konto implements SavableObject{
 	private int icon;
 	private boolean aktiv;
 	
-	public Konto(double kontostand, Nutzer ersteller, String name, String beschreibung, int icon, String id) {
+	public Konto(BigDecimal kontostand, Nutzer ersteller, String name, String beschreibung, int icon, String id) {
 		super();
 		this.kontostand = kontostand;
 		this.ersteller = ersteller;
@@ -55,14 +56,14 @@ public class Konto implements SavableObject{
 		return datum;
 	}*/
 
-	public double getInitKontostand() {
+	public BigDecimal getInitKontostand() {
 		return kontostand;
 	}
-	public double getKontostand() {
-		double aktuellerKontostand = kontostand;
+	public BigDecimal getKontostand() {
+		BigDecimal aktuellerKontostand = kontostand;
 		for(Transaktion t:tList) {
 			if(!t.isObsolet() && t.isAusgefuehrt()) {
-				aktuellerKontostand+= t.getBetrag();
+				aktuellerKontostand = aktuellerKontostand.add(t.getBetrag());
 			}
 		}
 		return aktuellerKontostand;
