@@ -111,7 +111,7 @@ public class XMLReader {
 			Double.parseDouble(element.getElementsByTagName("betrag").item(0).getTextContent()),
 			(Date) Date.valueOf(element.getElementsByTagName("datum").item(0).getTextContent()),
 			(Nutzer) sp.getObject(ClassType.NUTZER, element.getElementsByTagName("ersteller").item(0).getTextContent()),
-			(Konto) null,//////Kontos sind noch nicht geladen-> wird später eingefüllt
+			(Konto) new Konto(0, null, path, path, 0, path),//////Kontos sind noch nicht geladen-> wird später eingefüllt
 			(String) element.getElementsByTagName("beschreibung").item(0).getTextContent(),
 			(String) element.getElementsByTagName("titel").item(0).getTextContent());
 		
