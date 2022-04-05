@@ -89,7 +89,7 @@ public class UIUtils {
 		return (com.example.swe_finanzmanager.backend.konten.Konto) sp.createObject(newObj);
 	}
 	public Transaktion createTransaktion(BigDecimal betrag, Date datum, Nutzer ersteller, Konto zielKonto, String beschreibung, String titel) {
-		TransaktionDataSet newObj = new TransaktionDataSet(betrag, datum, ersteller, zielKonto, beschreibung, titel)
+		TransaktionDataSet newObj = new TransaktionDataSet(betrag, datum, ersteller, zielKonto, beschreibung, titel);
 		return (Transaktion) sp.createObject(newObj);
 	}
 	
