@@ -2,12 +2,16 @@ package com.example.swe_finanzmanager.backend.speicher;
 
 import com.example.swe_finanzmanager.backend.konten.Transaktion;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.swe_finanzmanager.backend.dataSets.KontoDataSet;
+import com.example.swe_finanzmanager.backend.dataSets.NutzerDataSet;
+import com.example.swe_finanzmanager.backend.dataSets.TransaktionDataSet;
 import com.example.swe_finanzmanager.backend.konten.Konto;
 import com.example.swe_finanzmanager.backend.nutzer.Nutzer;
 import com.example.swe_finanzmanager.backend.persistence.XMLAdapter;
@@ -75,4 +79,19 @@ public class UIUtils {
 	public void save() {
 		sp.save();
 	}
+	
+	public Nutzer createNutzer(String vorname, String nachname, int icon) {
+		NutzerDataSet newObj = new NutzerDataSet(vorname, nachname, icon);
+		return (Nutzer) sp.createObject(newObj);
+	}
+	public Konto createKonto(BigDecimal kontostand, Nutzer ersteller, String name, String beschreibung, int icon) {
+		KontoDataSet newObj = new KontoDataSet(kontostand, ersteller, name, beschreibung, icon);
+		return (com.example.swe_finanzmanager.backend.konten.Konto) sp.createObject(newObj);
+	}
+	public Transaktion createTransaktion(BigDecimal betrag, Date datum, Nutzer ersteller, Konto zielKonto, String beschreibung, String titel) {
+		TransaktionDataSet newObj = new TransaktionDataSet(betrag, datum, ersteller, zielKonto, beschreibung, titel)
+		return (Transaktion) sp.createObject(newObj);
+	}
+	
+	
 }

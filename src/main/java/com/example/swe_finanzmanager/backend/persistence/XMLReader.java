@@ -113,15 +113,17 @@ public class XMLReader {
 	private DataSet createTransaktionDataSet(Element element) {
 
 		TransaktionDataSet ret = new TransaktionDataSet(
+
 				BigDecimal.valueOf(Double.valueOf(element.getElementsByTagName("betrag").item(0).getTextContent())),
 				(Date) Date.valueOf(element.getElementsByTagName("datum").item(0).getTextContent()),
 				(Nutzer) sp.getObject(ClassType.NUTZER,
 						element.getElementsByTagName("ersteller").item(0).getTextContent()),
-				(Konto) null, ////// Kontos sind noch nicht geladen-> wird später eingefüllt
+				(Konto) new Konto(0, null, path, path, 0, path),//////Kontos sind noch nicht geladen-> wird später eingefüllt
 				(String) element.getElementsByTagName("beschreibung").item(0).getTextContent(),
 				(String) element.getElementsByTagName("titel").item(0).getTextContent());
 
 		ret.addKey("id", element.getElementsByTagName("id").item(0).getTextContent());
+
 		ret.addKey("ausgefuehrt", (element.getElementsByTagName("ausgefuehrt").item(0).getTextContent() == "true"));
 		ret.addKey("obsolet", (element.getElementsByTagName("obsolet").item(0).getTextContent() == "true"));
 		return ret;

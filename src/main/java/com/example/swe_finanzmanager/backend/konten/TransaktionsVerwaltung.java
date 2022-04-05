@@ -16,7 +16,9 @@ public class TransaktionsVerwaltung {
 	public void addTransaktion(Transaktion trkn) {
 		if(!trkn.isAusgefuehrt()) {
 			trPipeline.add(trkn);
-			trkn.getZielKonto().addTransaktion(trkn);
+			if(trkn.getZielKonto() != null) {
+				trkn.getZielKonto().addTransaktion(trkn);
+			}
 			this.update();
 		}
 	}
