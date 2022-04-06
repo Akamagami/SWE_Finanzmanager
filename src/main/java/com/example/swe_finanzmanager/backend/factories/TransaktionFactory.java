@@ -12,39 +12,17 @@ import com.example.swe_finanzmanager.backend.speicher.DataSet;
 import com.example.swe_finanzmanager.backend.speicher.ElementFactory;
 
 
-public class TransaktionFactory implements ElementFactory {
-
-	int index = 1;
-	
-	@Override
-	public String getIndex() {
-		return index+"";
-	}
+public class TransaktionFactory extends ElementFactory {
 
 	@Override
-	public void setIndex(String id) {
-		index = Integer.parseInt(id);
-
-	}
-	@Override
-	public Object create(DataSet dataSet, Optional<String> optId) {
-		String newIndex = "0";
-		if(optId.isPresent()) {
-			newIndex = optId.get();
-			if(Integer.parseInt(newIndex)+1 > index) {
-				index = Integer.parseInt(newIndex)+1;
-			}
-		} else {
-			newIndex = index+"";
-			index++;
-		}
+	protected Object createObjectWithIndex(DataSet dataSet, String index) {
 		Transaktion ret= new Transaktion((BigDecimal) dataSet.get("betrag"),
 							(Date) dataSet.get("datum"), 
 							(Nutzer) dataSet.get("ersteller"),
 							(Konto) dataSet.get("zielKonto"),
 							(String) dataSet.get("beschreibung"),
 							(String) dataSet.get("titel"),
-							newIndex);
+							index);
 		if(dataSet.hasKey("ausgefuehrt")) {
 			ret.setAusgefuehrt((boolean) dataSet.get("ausgefuehrt"));
 		}
