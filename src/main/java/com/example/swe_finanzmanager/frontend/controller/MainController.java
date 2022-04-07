@@ -2,6 +2,7 @@ package com.example.swe_finanzmanager.frontend.controller;
 
 import com.example.swe_finanzmanager.MainApplication;
 import com.example.swe_finanzmanager.backend.nutzer.Nutzer;
+import com.example.swe_finanzmanager.backend.speicher.Speicher;
 import com.example.swe_finanzmanager.backend.speicher.UIUtils;
 import com.example.swe_finanzmanager.frontend.cellfactories.NutzerCellFactory;
 import javafx.collections.FXCollections;
@@ -23,6 +24,7 @@ import java.util.List;
 public class MainController {
 
     private UIUtils uiUtils;
+    private Speicher speicher;
 
     @FXML
     ListView listViewStart;
@@ -77,5 +79,13 @@ public class MainController {
 
     public void setUiUtils(UIUtils uiUtils) {
         this.uiUtils = uiUtils;
+    }
+
+    public Speicher getSpeicher() {
+        return speicher;
+    }
+
+    public void setSpeicher(Speicher speicher) {
+        this.speicher = speicher;
     }
 }

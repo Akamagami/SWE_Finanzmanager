@@ -9,6 +9,7 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.paint.Color;
 import javafx.util.Callback;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class TransaktionCellFactory implements Callback<ListView<Transaktion>, ListCell<Transaktion>> {
@@ -26,7 +27,7 @@ public class TransaktionCellFactory implements Callback<ListView<Transaktion>, L
                     setText(null);
                 } else {
                     setText(transaktion.getBetrag() + " - " + transaktion.getTitel() + " - " + transaktion.getDatum());
-                    if (transaktion.getBetrag() < 0.0) {
+                    if (transaktion.getBetrag().compareTo(BigDecimal.ZERO) < 0) {
                         setStyle("-fx-control-inner-background: " + NEGATIVE_TRANSACTION + ";");
                     } else {
                         setStyle("-fx-control-inner-background: " + POSITIVE_TRANSACTION + ";");

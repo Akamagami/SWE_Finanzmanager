@@ -35,13 +35,11 @@ public class MasterdetailController implements Observable, Listener, Controller 
     private List<Listener> listenerList = new ArrayList<>();
     private DetailpageController detailpageController;
 
-
     @FXML
     AnchorPane masterdetailAP;
 
     @FXML
     ListView masterdetailListView;
-
 
     @FXML
     Pane detailpage;
@@ -51,6 +49,8 @@ public class MasterdetailController implements Observable, Listener, Controller 
         detailpageController = new DetailpageController();
         listenerList.add(detailpageController);
         detailpageController.addListener(this);
+
+
         stage.setTitle(currentNutzer.getName().fullName());
         masterdetailListView.getItems().clear();
         masterdetailListView.setPrefHeight(1270.0);
@@ -58,6 +58,8 @@ public class MasterdetailController implements Observable, Listener, Controller 
         AnchorPane.setLeftAnchor(masterdetailListView, 4.0);
         AnchorPane.setBottomAnchor(masterdetailListView, 50.0);
         AnchorPane.setLeftAnchor(detailpage, 260.0);
+
+
         MenuButton changeNutzer = new MenuButton("Nutzer wechseln");
         for (Nutzer nutzer : uiUtils.getAllNutzer()) {
             MenuItem item = new MenuItem(nutzer.getName().fullName());
@@ -85,7 +87,12 @@ public class MasterdetailController implements Observable, Listener, Controller 
         AnchorPane.setBottomAnchor(changeNutzer, 5.0);
         AnchorPane.setLeftAnchor(changeNutzer, 5.0);
 
+
         masterdetailAP.getChildren().add(changeNutzer);
+        FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource("detailpage.fxml"));
+        loader.setController(detailpageController);
+        Parent loadedElement = loader.load();
+
 
         try {
             ObservableList<Konto> kontenObservableList = FXCollections.observableList(uiUtils.getNutzerKonten(currentNutzer));
@@ -99,10 +106,8 @@ public class MasterdetailController implements Observable, Listener, Controller 
                     try {
                         notifyListeners();
                     } catch (IOException e) {
-                        e.printStackTrace();
                         buildEmpty();
                     }
-                    //detailpageController.build();
                 }
             });
             masterdetailListView.refresh();
@@ -111,92 +116,11 @@ public class MasterdetailController implements Observable, Listener, Controller 
             detailpageController.addUIUtils(uiUtils);
             detailpageController.build();
         } catch (Exception e) {
-            System.out.println(e);
-            //detailpageController.buildEmpty();
         }
 
-        FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource("detailpage.fxml"));
-        loader.setController(detailpageController);
-        Parent loadedElement = loader.load();
         notifyListeners();
         detailpage.getChildren().clear();
         detailpage.getChildren().add(loadedElement);
-
-
-
-        /*detailpageController = new DetailpageController();
-        listenerList.add(detailpageController);
-        clear();
-        System.out.println("Build new Masterdetail!");
-        stage.setTitle(currentNutzer.getName().fullName());
-        masterdetailListView.getItems().clear();
-        System.out.println(uiUtils.getNutzerKonten(currentNutzer));
-
-        masterdetailListView.setPrefHeight(1270.0);
-        AnchorPane.setTopAnchor(masterdetailListView, 3.0);
-        AnchorPane.setLeftAnchor(masterdetailListView, 4.0);
-        AnchorPane.setBottomAnchor(masterdetailListView, 50.0);
-        AnchorPane.setLeftAnchor(detailpage, 260.0);
-        MenuButton changeNutzer = new MenuButton("Nutzer wechseln");
-        for (Nutzer nutzer : uiUtils.getAllNutzer()) {
-            MenuItem item = new MenuItem(nutzer.getName().fullName());
-            item.setId(nutzer.getId());
-            item.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    System.out.println("Nutzerwechsel");
-                    MenuItem source = (MenuItem) event.getSource();
-                    setCurrentNutzer(uiUtils.getNutzer(source.getId()));
-                    System.out.println(getCurrentNutzer().getName().fullName());
-                    try {
-                        build();
-                        notifyListeners();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    //build();
-                }
-            });
-            changeNutzer.getItems().add(item);
-        }
-        changeNutzer.setPrefHeight(40);
-        changeNutzer.setPrefWidth(200);
-        changeNutzer.setVisible(true);
-        changeNutzer.setPopupSide(Side.TOP);
-        AnchorPane.setBottomAnchor(changeNutzer, 5.0);
-        AnchorPane.setLeftAnchor(changeNutzer, 5.0);
-
-        try {
-            ObservableList<Konto> kontenObservableList = FXCollections.observableList(uiUtils.getNutzerKonten(currentNutzer));
-            masterdetailListView.setCellFactory(new KontoCellFactory());
-            masterdetailListView.setItems(kontenObservableList);
-            masterdetailListView.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent mouseEvent) {
-                    Konto selectedKonto = (Konto) masterdetailListView.getSelectionModel().getSelectedItem();
-                    detailpageController.setCurrentKonto(selectedKonto);
-                    try {
-                        notifyListeners();
-                        System.out.println("Notified listeners!");
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    //detailpageController.build();
-                }
-            });
-            masterdetailListView.refresh();
-            detailpageController.setCurrentKonto(uiUtils.getNutzerKonten(currentNutzer).get(0));
-            detailpageController.build();
-        } catch (Exception e) {
-            System.out.println(e);
-            detailpageController.buildEmpty();
-        }
-
-        masterdetailAP.getChildren().add(changeNutzer);
-        FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource("detailpage.fxml"));
-        loader.setController(detailpageController);
-        Parent loadedElement = loader.load();
-        detailpage.getChildren().add(loadedElement);*/
     }
 
     @Override
@@ -206,7 +130,6 @@ public class MasterdetailController implements Observable, Listener, Controller 
 
     public void clear() {
         masterdetailListView.getItems().clear();
-        //detailpageController.clear();
     }
 
     public void buildEmpty() {
