@@ -52,10 +52,20 @@ public class DetailpageController implements com.example.swe_finanzmanager.front
     private List<Label> labelList = Arrays.asList(kontoname, kontostand, ersteller, id);
     private UIUtils uiUtils;
     private AddTransactionController addTransactionController;
+    private AddMitgliedController addMitgliedController;
 
     @Override
     public void build() throws IOException{
         try {
+            addTransactionController = new AddTransactionController();
+            addTransactionController.addListener(this);
+            addTransactionController.addUIUtils(uiUtils);
+            addTransactionController.setCurrentNutzer(currentNutzer);
+            addTransactionController.setCurrentKonto(currentKonto);
+            addMitgliedController = new AddMitgliedController();
+            addMitgliedController.addListener(this);
+            addMitgliedController.addUIUtils(uiUtils);
+            addMitgliedController.setCurrentKonto(currentKonto);
 
             kontoname.setText(currentKonto.getName());
             kontostand.setText(currentKonto.getKontostand().toString());
@@ -68,31 +78,28 @@ public class DetailpageController implements com.example.swe_finanzmanager.front
 
 
             transaktionListView.setPadding(new Insets(5));
-            ObservableList<Transaktion> transaktionObservableList = FXCollections.observableList(currentKonto.gettList());
             transaktionListView.setCellFactory(new TransaktionCellFactory());
-            transaktionListView.setItems(transaktionObservableList);
+            transaktionListView.setItems(FXCollections.observableList(currentKonto.gettList()));
             transaktionAddButton.setPadding(new Insets(5));
             transaktionAddButton.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent actionEvent) {
                     FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource("addTransactions.fxml"));
                     try {
-                        addTransactionController = new AddTransactionController();
-                        addTransactionController.addUIUtils(uiUtils);
-                        addTransactionController.setCurrentNutzer(currentNutzer);
                         loader.setController(addTransactionController);
                         Parent newRoot = (Parent) loader.load();
                         addTransactionController.build();
                         Stage stage = new Stage();
                         stage.setTitle("Neue Transaktion hinzufügen");
                         stage.setScene(new Scene(newRoot));
+                        stage.setResizable(false);
                         stage.show();
 
                     } catch (IOException e) {
                     }
                 }
             });
-
+            transaktionListView.refresh();
 
             mitgliederListView.setPadding(new Insets(5));
             ObservableList<Nutzer> mitgliederObservableList = FXCollections.observableList(currentKonto.getMitgliedList());
@@ -101,14 +108,29 @@ public class DetailpageController implements com.example.swe_finanzmanager.front
             mitgliederListView.setMouseTransparent(true);
             mitgliederListView.setFocusTraversable(false);
             mitgliederAddButton.setPadding(new Insets(5));
+            mitgliederAddButton.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent actionEvent) {
+                    FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource("addMitglieder.fxml"));
+                    try {
+                        loader.setController(addMitgliedController);
+                        Parent newRoot = (Parent) loader.load();
+                        addMitgliedController.build();
+                        Stage stage = new Stage();
+                        stage.setTitle("Neues Mitglied hinzufügen");
+                        stage.setScene(new Scene(newRoot));
+                        stage.setResizable(false);
+                        stage.show();
+
+                    } catch (IOException e) {
+                    }
+                }
+            });
 
             GridPane.setMargin(infoPane, new Insets(5));
             GridPane.setMargin(transaktionsPane, new Insets(10));
             GridPane.setMargin(mitgliederPane, new Insets(10));
             AnchorPane.setLeftAnchor(transaktionsPane, 150.0);
-
-            addTransactionController = new AddTransactionController();
-            addTransactionController.addListener(this);
 
         } catch (Exception e) {
             buildEmpty();
@@ -142,7 +164,6 @@ public class DetailpageController implements com.example.swe_finanzmanager.front
 
     @Override
     public void update(com.example.swe_finanzmanager.frontend.controller.Observable observable) throws IOException {
-        clear();
         build();
     }
 

@@ -22,6 +22,7 @@ import java.util.List;
 public class MainApplication extends Application {
 
     private static MainController mainController = new MainController();
+    private static UIUtils uiUtils;
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -33,10 +34,15 @@ public class MainApplication extends Application {
         stage.show();
     }
 
+    @Override
+    public void stop() {
+        uiUtils.save();
+    }
+
     public static void main(String[] args) {
         Speicher sp = new Speicher();
         //sp.setDataAdapter(new XMLAdapter());
-        UIUtils uiUtils = new UIUtils();
+        uiUtils = new UIUtils();
         mainController.setUiUtils(uiUtils);
 
 

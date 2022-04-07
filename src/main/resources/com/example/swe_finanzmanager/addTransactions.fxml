@@ -8,15 +8,13 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            prefHeight="400.0" prefWidth="600.0">
+            prefHeight="120.0" prefWidth="150.0">
 
     <GridPane fx:id="transactionFormGridPane">
         <Label fx:id="titelLabel" text="Titel" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
         <TextField fx:id="titel" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
         <Label fx:id="betragLabel" text="Betrag" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
         <TextField fx:id="betrag" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-        <Label fx:id="zielkontoLabel" text="Zielkonto" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
-        <ChoiceBox fx:id="zielkonten" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
         <Label fx:id="beschreibungLabel" text="Beschreibung" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
         <TextField fx:id="beschreibung" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
         <Button fx:id="addNewTransaktionButton" text="Hinzufügen" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
