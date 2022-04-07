@@ -90,7 +90,7 @@ public class UIUtils {
 	}
 	public Transaktion createTransaktion(BigDecimal betrag, Date datum, Nutzer ersteller, Konto zielKonto, String beschreibung, String titel) {
 		TransaktionDataSet newObj = new TransaktionDataSet(betrag, datum, ersteller, zielKonto, beschreibung, titel);
-		return (Transaktion) sp.createObject(newObj);
+		return (Transaktion) sp.createAndAddTransaktion(newObj);
 	}
 	
 	
