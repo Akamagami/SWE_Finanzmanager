@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 import java.time.LocalDate;
 
@@ -90,10 +91,10 @@ public class TestSpeicher {
 		// speicher instanz
 		Speicher sp = new Speicher();
 		// data
-		double betrag = 122;
+		BigDecimal betrag = new BigDecimal("123");
 		Date datum = Date.valueOf("1990-04-04"); // past transaktion
 		Nutzer ersteller = mock(Nutzer.class);
-		Konto zielKonto = new Konto(200, mock(Nutzer.class), "Name", "Beschreibung", 42, "9238472"); // echtes konto ist
+		Konto zielKonto = new Konto(new BigDecimal("200"), mock(Nutzer.class), "Name", "Beschreibung", 42, "9238472"); // echtes konto ist
 																										// wichtig für
 																										// verknüpfung
 		String beschreibung = "Schutzgeld";
@@ -114,10 +115,10 @@ public class TestSpeicher {
 		// speicher instanz
 		Speicher sp = new Speicher();
 		// data
-		double betrag = 122;
+		BigDecimal betrag = new BigDecimal("123");
 		Date datum = Date.valueOf("8888-04-04"); // future transaktion
 		Nutzer ersteller = mock(Nutzer.class);
-		Konto zielKonto = new Konto(200, mock(Nutzer.class), "Name", "Beschreibung", 42, "9238472"); // echtes konto ist
+		Konto zielKonto = new Konto(new BigDecimal("200"), mock(Nutzer.class), "Name", "Beschreibung", 42, "9238472"); // echtes konto ist
 																										// wichtig für
 																										// verknüpfung
 		String beschreibung = "Schutzgeld";
@@ -139,7 +140,7 @@ public class TestSpeicher {
 		assertTrue(t1.isAusgefuehrt());
 	}
 
-	private TransaktionDataSet createMockTransaktionDataSet(double betrag, Date datum, Nutzer ersteller,
+	private TransaktionDataSet createMockTransaktionDataSet(BigDecimal betrag, Date datum, Nutzer ersteller,
 			Konto zielKonto, String beschreibung, String titel) {
 		TransaktionDataSet mockDataSet = mock(TransaktionDataSet.class);
 		when(mockDataSet.get("betrag")).thenReturn(betrag);

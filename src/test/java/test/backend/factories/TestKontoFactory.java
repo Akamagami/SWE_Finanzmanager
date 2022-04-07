@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -34,7 +35,7 @@ public class TestKontoFactory {
 	@Test
 	public void testKontoCreationWithoutId() {
 		// Object Values
-		double kontostand = 3423;
+		BigDecimal kontostand = new BigDecimal("123");
 		Nutzer ersteller = mock(Nutzer.class);
 		String name = "KontoName";
 		String beschreibung = "KontoBeschreibung";
@@ -52,7 +53,7 @@ public class TestKontoFactory {
 	@Test
 	public void testKontoCreationWithIdAndValues() {
 		// Object Values
-		double kontostand = 2423;
+		BigDecimal kontostand = new BigDecimal("123");
 		Nutzer ersteller = mock(Nutzer.class);
 		String name = "KontoName";
 		String beschreibung = "KontoBeschreibung";
@@ -80,9 +81,9 @@ public class TestKontoFactory {
 	}
 
 	@Test
-	public void testKontoCreationWithoutLowerId() {
+	public void testKontoCreationWithLowerId() {
 		// Object Values
-		double kontostand = 234234;
+		BigDecimal kontostand = new BigDecimal("123");
 		Nutzer ersteller = mock(Nutzer.class);
 		String name = "KontoName";
 		String beschreibung = "KontoBeschreibung";
@@ -102,7 +103,7 @@ public class TestKontoFactory {
 		assertEquals(testFactory.getIndex(), testIndex);
 	}
 
-	private DataSet createMockKontoDataSet(double kontostand, Nutzer ersteller, String name, String beschreibung,
+	private DataSet createMockKontoDataSet(BigDecimal kontostand, Nutzer ersteller, String name, String beschreibung,
 			int icon) {
 		DataSet mockDataSet = mock(KontoDataSet.class);
 		when(mockDataSet.get("kontostand")).thenReturn(kontostand);
@@ -113,7 +114,7 @@ public class TestKontoFactory {
 		return mockDataSet;
 	}
 
-	private DataSet createMockKontoDataSetWithExtraValues(double kontostand, Nutzer ersteller, String name,
+	private DataSet createMockKontoDataSetWithExtraValues(BigDecimal kontostand, Nutzer ersteller, String name,
 			String beschreibung, int icon, boolean aktiv, List<Nutzer> mitgliedList, List<Transaktion> tList) {
 		DataSet mockDataSet = createMockKontoDataSet(kontostand, ersteller, name, beschreibung, icon);
 

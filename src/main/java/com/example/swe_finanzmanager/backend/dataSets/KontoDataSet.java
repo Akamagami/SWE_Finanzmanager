@@ -1,12 +1,14 @@
 package com.example.swe_finanzmanager.backend.dataSets;
 
+import java.math.BigDecimal;
+
 import com.example.swe_finanzmanager.backend.nutzer.Nutzer;
 import com.example.swe_finanzmanager.backend.speicher.DataSet;
 import com.example.swe_finanzmanager.constants.ClassType;
 
 public class KontoDataSet extends DataSet {
 
-	public KontoDataSet(double kontostand, Nutzer ersteller, String name, String beschreibung, int icon) {
+	public KontoDataSet(BigDecimal kontostand, Nutzer ersteller, String name, String beschreibung, int icon) {
 		////not an actual
 		super(ClassType.KONTO);
 		this.addKey("kontostand", kontostand);

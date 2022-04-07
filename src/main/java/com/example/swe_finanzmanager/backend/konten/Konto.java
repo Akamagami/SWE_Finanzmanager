@@ -1,5 +1,6 @@
 package com.example.swe_finanzmanager.backend.konten;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.ArrayList;
 
@@ -8,9 +9,9 @@ import com.example.swe_finanzmanager.backend.nutzer.Nutzer;
 import com.example.swe_finanzmanager.backend.speicher.DataSet;
 import com.example.swe_finanzmanager.backend.speicher.SavableObject;
 
-public class Konto implements SavableObject{
+public class Konto extends SavableObject{
 
-	private double kontostand;	//initialer Kontostand wird nie ge�ndert
+	private BigDecimal kontostand;	//initialer Kontostand wird nie ge�ndert
 	//private Date datum;
 	private Nutzer ersteller;
 	
@@ -20,22 +21,21 @@ public class Konto implements SavableObject{
 	
 	private String name;
 	private String beschreibung;
-	private String id;
 	private int icon;
 	private boolean aktiv;
 	
-	public Konto(double kontostand, Nutzer ersteller, String name, String beschreibung, int icon, String id) {
-		super();
+	public Konto(BigDecimal kontostand, Nutzer ersteller, String name, String beschreibung, int icon, String id) {
+		super(id);
 		this.kontostand = kontostand;
 		this.ersteller = ersteller;
 		this.name = name;
 		this.beschreibung = beschreibung;
-		this.id = id;
 		this.icon = icon;
 		this.aktiv = true;
 		this.addMitglied(ersteller);
 	}
-	
+
+
 	public void addMitglied(Nutzer n) {
 		if(!mitgliedList.contains(n)) {
 			mitgliedList.add(n);
@@ -55,14 +55,14 @@ public class Konto implements SavableObject{
 		return datum;
 	}*/
 
-	public double getInitKontostand() {
+	public BigDecimal getInitKontostand() {
 		return kontostand;
 	}
-	public double getKontostand() {
-		double aktuellerKontostand = kontostand;
+	public BigDecimal getKontostand() {
+		BigDecimal aktuellerKontostand = kontostand;
 		for(Transaktion t:tList) {
 			if(!t.isObsolet() && t.isAusgefuehrt()) {
-				aktuellerKontostand+= t.getBetrag();
+				aktuellerKontostand = aktuellerKontostand.add(t.getBetrag());
 			}
 		}
 		return aktuellerKontostand;
@@ -96,11 +96,6 @@ public class Konto implements SavableObject{
 	public String getBeschreibung() {
 		return beschreibung;
 	}
-
-	public String getId() {
-		return id;
-	}
-
 	public int getIcon() {
 		return icon;
 	}
@@ -125,19 +120,12 @@ public class Konto implements SavableObject{
 	}
 	@Override
 	public String toString() {
-		return id+"";
+		return this.getId()+"";
 	}
-
-	@Override
-	public String getSaveString() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	@Override
 	public DataSet getXMLDataSet() {
 		DataSet ret = new KontoDataSet(kontostand, ersteller, name, beschreibung, icon);
-		ret.addKey("id", id);
+		ret.addKey("id", this.getId());
 		ret.addKey("aktiv", aktiv);
 		ret.addKey("mitgliedList", mitgliedList);
 		ret.addKey("tList", tList);

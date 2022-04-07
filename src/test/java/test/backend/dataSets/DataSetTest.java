@@ -3,6 +3,7 @@ package test.backend.dataSets;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -34,7 +35,7 @@ public class DataSetTest {
 	@Test
 	public void testCreationOfDataSetTransaktion() {
 		/* Test Value */
-		double betrag = 232;
+		BigDecimal betrag = new BigDecimal("123");
 		Date datum = mock(Date.class);
 		Nutzer ersteller = mock(Nutzer.class);
 		Konto zielKonto = mock(Konto.class);
@@ -48,7 +49,7 @@ public class DataSetTest {
 	@Test
 	public void testCreationOfKontoDataSet() {
 		/* Test Value */
-		double kontostand = 232;
+		BigDecimal kontostand = new BigDecimal("123");
 		Nutzer ersteller = mock(Nutzer.class);
 		String beschreibung = "beschreibung";
 		String name = "name";
@@ -59,7 +60,7 @@ public class DataSetTest {
 		assertEqualsAllKontoDataSetValues(testSet, kontostand, ersteller, name, beschreibung, icon);
 	}
 
-	private void assertEqualsAllKontoDataSetValues(KontoDataSet testSet, double kontostand, Nutzer ersteller,
+	private void assertEqualsAllKontoDataSetValues(KontoDataSet testSet, BigDecimal kontostand, Nutzer ersteller,
 			String name, String beschreibung, int icon) {
 		/* Test if all Values are there */
 		assertEquals(kontostand, testSet.get("kontostand"));
@@ -99,7 +100,7 @@ public class DataSetTest {
 		assertEquals(icon, values.get("icon"));
 	}
 
-	private void assertEqualsAllTransaktionDataSetValues(TransaktionDataSet testSet, double betrag, Date datum,
+	private void assertEqualsAllTransaktionDataSetValues(TransaktionDataSet testSet, BigDecimal betrag, Date datum,
 			Nutzer ersteller, Konto zielKonto, String beschreibung, String titel) {
 		/* Test if all Values are there */
 		assertEquals(betrag, testSet.get("betrag"));

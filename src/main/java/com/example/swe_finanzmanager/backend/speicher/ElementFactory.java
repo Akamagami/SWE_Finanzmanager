@@ -4,12 +4,34 @@ package com.example.swe_finanzmanager.backend.speicher;
 import java.util.Optional;
 
 
-public interface ElementFactory {
+public abstract class ElementFactory {
 	
-	public String getIndex();
+	private int index = 1;
 	
-	public void setIndex(String id);
+	public String getIndex() {
+		return index + "";
+	}
 	
-	public Object create(DataSet dataSet,Optional<String> optId);
-		
+	public void setIndex(String id) {
+		index = Integer.parseInt(id);
+
+	}
+	
+	public Object create(DataSet dataSet,Optional<String> optId){
+		String newIndex = "0";
+		if(optId.isPresent()) {
+			newIndex = optId.get();
+			if(Integer.parseInt(newIndex)+1 > index) {
+				index = Integer.parseInt(newIndex)+1;
+			}
+		} else {
+			newIndex = index+"";
+			index++;
+		}
+		return createObjectWithIndex(dataSet, newIndex);
+	}
+	
+	protected Object createObjectWithIndex(DataSet dataSet, String index) {
+		return null;
+	}
 }

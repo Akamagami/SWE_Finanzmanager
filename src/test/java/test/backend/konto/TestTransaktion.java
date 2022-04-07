@@ -3,6 +3,7 @@ package test.backend.konto;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 
 import org.junit.jupiter.api.Test;
@@ -15,7 +16,7 @@ public class TestTransaktion {
 	@Test
 	public void testSetAndGetObsolet() {
 		// normaler Konstrukter anstatt factory
-		Transaktion testTransaktion = new Transaktion(2323.0, mock(Date.class), mock(Nutzer.class), mock(Konto.class),
+		Transaktion testTransaktion = new Transaktion(new BigDecimal("2323.0"), mock(Date.class), mock(Nutzer.class), mock(Konto.class),
 				"Beschreibung", "titel", "834329");
 
 		Konto testKonto = mock(Konto.class);

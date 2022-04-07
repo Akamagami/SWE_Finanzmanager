@@ -1,13 +1,22 @@
 package com.example.swe_finanzmanager;
 
-import com.example.swe_finanzmanager.backend.speicher.UIUtils;
-import com.example.swe_finanzmanager.frontend.controller.MainController;
+import com.example.swe_finanzmanager.backend.dataSets.KontoDataSet;
+import com.example.swe_finanzmanager.backend.dataSets.NutzerDataSet;
+import com.example.swe_finanzmanager.backend.dataSets.TransaktionDataSet;
+import com.example.swe_finanzmanager.backend.konten.Konto;
+import com.example.swe_finanzmanager.backend.nutzer.Nutzer;
+import com.example.swe_finanzmanager.backend.speicher.DataSet;
+import com.example.swe_finanzmanager.backend.speicher.Speicher;
+import com.example.swe_finanzmanager.constants.ClassType;
+import com.example.swe_finanzmanager.frontend.MainController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.util.List;
 
 public class MainApplication extends Application {
 
@@ -18,16 +27,16 @@ public class MainApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("startpage.fxml"));
         fxmlLoader.setController(mainController);
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
-        stage.setTitle("Nutzer wählen");
+        stage.setTitle("Hello!");
         stage.setScene(scene);
         stage.show();
     }
 
     public static void main(String[] args) {
-        UIUtils uiUtils = new UIUtils();
+        Speicher sp = new Speicher();
+        //sp.setDataAdapter(new XMLAdapter());
 
-        mainController.setUiUtils(uiUtils);
-        /*DataSet N1 = new NutzerDataSet("Hi", "Work", 2);
+        DataSet N1 = new NutzerDataSet("Hi", "Work", 2);
 
         Nutzer n1 = (Nutzer) sp.createObject(N1);
         System.out.println("Nutzer:" + n1.toString());
@@ -38,9 +47,9 @@ public class MainApplication extends Application {
 
         for(Nutzer n:(List<Nutzer>)(List<?>) sp.getAll(ClassType.NUTZER)) {
             System.out.println("nnutzer:" + n.toString());
-        }*/
+        }
         /*------------------------------------------------------------------------*/
-        /*
+
         DataSet K1 = new KontoDataSet(100.23,(Nutzer) sp.getObject(ClassType.NUTZER, "2"),"Konto1","Beeee",2);
         Konto ko1 = (Konto) sp.createObject(K1);
         ko1.addMitglied((Nutzer) sp.getObject(ClassType.NUTZER, "1"));
@@ -62,7 +71,7 @@ public class MainApplication extends Application {
         //System.out.println("After:" + ko1.getKontostand());
 
 
-        //sp.save();*/
+        //sp.save();
         launch();
     }
 }
