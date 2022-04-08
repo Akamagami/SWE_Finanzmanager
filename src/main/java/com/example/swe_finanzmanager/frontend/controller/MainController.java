@@ -42,7 +42,7 @@ public class MainController {
         masterdetailController.addUIUtils(uiUtils);
 
         loader.setController(masterdetailController);
-        Scene masterDetailScene = new Scene(loader.load(), 1000, 500);
+        Scene masterDetailScene = new Scene(loader.load(), 1000, 350);
 
         Stage stage = (Stage) root.getScene().getWindow();
         stage.setScene(masterDetailScene);

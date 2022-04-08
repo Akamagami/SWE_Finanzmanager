@@ -32,6 +32,9 @@ import java.util.List;
 
 public class DetailpageController implements com.example.swe_finanzmanager.frontend.controller.Observable, Listener, Controller {
 
+    AddMitgliedButton addMitgliedButton;
+    AddTransaktionButton addTransaktionButton;
+
 
     @FXML
     GridPane gridPane, infoPane, transaktionsPane, mitgliederPane;
@@ -41,9 +44,6 @@ public class DetailpageController implements com.example.swe_finanzmanager.front
 
     @FXML
     ListView transaktionListView, mitgliederListView;
-
-    @FXML
-    Button transaktionAddButton, mitgliederAddButton;
 
 
     private Konto currentKonto;
@@ -66,6 +66,10 @@ public class DetailpageController implements com.example.swe_finanzmanager.front
             addMitgliedController.addListener(this);
             addMitgliedController.addUIUtils(uiUtils);
             addMitgliedController.setCurrentKonto(currentKonto);
+            addTransaktionButton = new AddTransaktionButton(addTransactionController);
+            transaktionsPane.add(addTransaktionButton, 0, 2);
+            addMitgliedButton = new AddMitgliedButton(addMitgliedController);
+            mitgliederPane.add(addMitgliedButton, 0, 2);
 
             kontoname.setText(currentKonto.getName());
             kontostand.setText(currentKonto.getKontostand().toString());
@@ -80,25 +84,7 @@ public class DetailpageController implements com.example.swe_finanzmanager.front
             transaktionListView.setPadding(new Insets(5));
             transaktionListView.setCellFactory(new TransaktionCellFactory());
             transaktionListView.setItems(FXCollections.observableList(currentKonto.gettList()));
-            transaktionAddButton.setPadding(new Insets(5));
-            transaktionAddButton.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent actionEvent) {
-                    FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource("addTransactions.fxml"));
-                    try {
-                        loader.setController(addTransactionController);
-                        Parent newRoot = (Parent) loader.load();
-                        addTransactionController.build();
-                        Stage stage = new Stage();
-                        stage.setTitle("Neue Transaktion hinzufügen");
-                        stage.setScene(new Scene(newRoot));
-                        stage.setResizable(false);
-                        stage.show();
-
-                    } catch (IOException e) {
-                    }
-                }
-            });
+            addTransaktionButton.setPadding(new Insets(5));
             transaktionListView.refresh();
 
             mitgliederListView.setPadding(new Insets(5));
@@ -107,25 +93,7 @@ public class DetailpageController implements com.example.swe_finanzmanager.front
             mitgliederListView.setItems(mitgliederObservableList);
             mitgliederListView.setMouseTransparent(true);
             mitgliederListView.setFocusTraversable(false);
-            mitgliederAddButton.setPadding(new Insets(5));
-            mitgliederAddButton.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent actionEvent) {
-                    FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource("addMitglieder.fxml"));
-                    try {
-                        loader.setController(addMitgliedController);
-                        Parent newRoot = (Parent) loader.load();
-                        addMitgliedController.build();
-                        Stage stage = new Stage();
-                        stage.setTitle("Neues Mitglied hinzufügen");
-                        stage.setScene(new Scene(newRoot));
-                        stage.setResizable(false);
-                        stage.show();
-
-                    } catch (IOException e) {
-                    }
-                }
-            });
+            addMitgliedButton.setPadding(new Insets(5));
 
             GridPane.setMargin(infoPane, new Insets(5));
             GridPane.setMargin(transaktionsPane, new Insets(10));
