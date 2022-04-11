@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.text.Text?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            prefHeight="100.0" prefWidth="170.0">
+
+    <GridPane>
+        <Label fx:id="kontonameLabel" text="Name" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+        <TextField fx:id="kontoname" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+        <Label fx:id="kontostandLabel" text="Kontostand" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+        <TextField fx:id="kontostand" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+        <Label fx:id="beschreibungLabel" text="Beschreibung" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+        <TextField fx:id="beschreibung" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+        <Button fx:id="addKontoButton" text="Neues Konto erstellen" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+    </GridPane>
+
+</AnchorPane>

@@ -4,6 +4,8 @@ import com.example.swe_finanzmanager.MainApplication;
 import com.example.swe_finanzmanager.backend.konten.Konto;
 import com.example.swe_finanzmanager.backend.nutzer.Nutzer;
 import com.example.swe_finanzmanager.backend.speicher.UIUtils;
+import com.example.swe_finanzmanager.frontend.buttons.AddKontoButton;
+import com.example.swe_finanzmanager.frontend.buttons.AddNutzerButton;
 import com.example.swe_finanzmanager.frontend.cellfactories.KontoCellFactory;
 import javafx.beans.InvalidationListener;
 import javafx.collections.FXCollections;
@@ -14,10 +16,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Side;
 import javafx.scene.Parent;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.MenuItem;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -33,13 +32,16 @@ public class MasterdetailController implements Controller {
     private UIUtils uiUtils;
     private Stage stage;
     private List<Listener> listenerList = new ArrayList<>();
-    private Controller detailpageController;
+    private Controller detailpageController, addKontoController, addNutzerController;
+    Button addKontoButton;
+    Button addNutzerButton;
 
     @FXML
     AnchorPane masterdetailAP;
 
     @FXML
     ListView masterdetailListView;
+
 
     @FXML
     Pane detailpage;
@@ -50,13 +52,30 @@ public class MasterdetailController implements Controller {
         listenerList.add(detailpageController);
         detailpageController.addListener(this);
 
+        addKontoController = new AddKontoController();
+        addKontoController.setCurrentNutzer(currentNutzer);
+        addKontoController.addUIUtils(uiUtils);
+        addKontoController.addListener(this);
+        addKontoButton = new AddKontoButton(addKontoController);
+        AnchorPane.setLeftAnchor(addKontoButton, 5.0);
+        AnchorPane.setTopAnchor(addKontoButton, 275.0);
+        masterdetailAP.getChildren().add(addKontoButton);
+
+        addNutzerController = new AddNutzerController();
+        addNutzerController.addUIUtils(uiUtils);
+        addNutzerController.addListener(this);
+        addNutzerButton = new AddNutzerButton(addNutzerController);
+        AnchorPane.setLeftAnchor(addNutzerButton, 125.0);
+        AnchorPane.setTopAnchor(addNutzerButton, 275.0);
+        masterdetailAP.getChildren().add(addNutzerButton);
+
 
         stage.setTitle(currentNutzer.getName().fullName());
         masterdetailListView.getItems().clear();
-        masterdetailListView.setPrefHeight(1270.0);
+        masterdetailListView.setPrefHeight(1240.0);
         AnchorPane.setTopAnchor(masterdetailListView, 3.0);
         AnchorPane.setLeftAnchor(masterdetailListView, 4.0);
-        AnchorPane.setBottomAnchor(masterdetailListView, 50.0);
+        AnchorPane.setBottomAnchor(masterdetailListView, 80.0);
         AnchorPane.setLeftAnchor(detailpage, 260.0);
 
 

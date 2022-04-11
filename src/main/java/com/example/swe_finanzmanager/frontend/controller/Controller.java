@@ -9,6 +9,7 @@ import java.io.IOException;
 public interface Controller extends Listener, Observable {
 
     public void build() throws IOException;
+
     public void addUIUtils(UIUtils uiUtils);
 
     public void setCurrentNutzer(Nutzer currentNutzer);
