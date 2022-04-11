@@ -5,11 +5,11 @@ import com.example.swe_finanzmanager.backend.dataSets.NutzerDataSet;
 import com.example.swe_finanzmanager.backend.dataSets.TransaktionDataSet;
 import com.example.swe_finanzmanager.backend.konten.Konto;
 import com.example.swe_finanzmanager.backend.nutzer.Nutzer;
-import com.example.swe_finanzmanager.backend.persistence.XMLAdapter;
 import com.example.swe_finanzmanager.backend.speicher.DataSet;
 import com.example.swe_finanzmanager.backend.speicher.Speicher;
+import com.example.swe_finanzmanager.backend.speicher.UIUtils;
 import com.example.swe_finanzmanager.constants.ClassType;
-import com.example.swe_finanzmanager.frontend.MainController;
+import com.example.swe_finanzmanager.frontend.controller.MainController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -22,6 +22,7 @@ import java.util.List;
 public class MainApplication extends Application {
 
     private static MainController mainController = new MainController();
+    private static UIUtils uiUtils;
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -33,14 +34,16 @@ public class MainApplication extends Application {
         stage.show();
     }
 
+    @Override
+    public void stop() {
+        uiUtils.save();
+    }
+
     public static void main(String[] args) {
         Speicher sp = new Speicher();
-        sp.setDataAdapter(new XMLAdapter());
-
-        /*------------------------------------------------------------------------*/
-
-
-        mainController.setSp(sp);
+        //sp.setDataAdapter(new XMLAdapter());
+        uiUtils = new UIUtils();
+        mainController.setUiUtils(uiUtils);
 
 
         //sp.createAndAddTransaktion(t1);
