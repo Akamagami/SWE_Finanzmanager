@@ -1,40 +1,31 @@
 package com.example.swe_finanzmanager.frontend.controller;
 
-import com.example.swe_finanzmanager.MainApplication;
 import com.example.swe_finanzmanager.backend.konten.Konto;
-import com.example.swe_finanzmanager.backend.konten.Transaktion;
 import com.example.swe_finanzmanager.backend.nutzer.Nutzer;
 import com.example.swe_finanzmanager.backend.speicher.UIUtils;
+import com.example.swe_finanzmanager.frontend.buttons.AddMitgliedButton;
+import com.example.swe_finanzmanager.frontend.buttons.AddTransaktionButton;
 import com.example.swe_finanzmanager.frontend.cellfactories.MitgliederCellFactory;
 import com.example.swe_finanzmanager.frontend.cellfactories.TransaktionCellFactory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.EventListener;
 import java.util.List;
 
-public class DetailpageController implements com.example.swe_finanzmanager.frontend.controller.Observable, Listener, Controller {
+public class DetailpageController implements Controller {
 
     Button addMitgliedButton;
     Button addTransaktionButton;
-
 
     @FXML
     GridPane gridPane, infoPane, transaktionsPane, mitgliederPane;

@@ -1,6 +1,7 @@
-package com.example.swe_finanzmanager.frontend.controller;
+package com.example.swe_finanzmanager.frontend.buttons;
 
 import com.example.swe_finanzmanager.MainApplication;
+import com.example.swe_finanzmanager.frontend.controller.Controller;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;

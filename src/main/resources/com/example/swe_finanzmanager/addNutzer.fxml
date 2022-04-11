@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.text.Text?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            prefHeight="100.0" prefWidth="170.0">
+
+    <GridPane>
+        <Label fx:id="vornameLabel" text="Vorname" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+        <TextField fx:id="vorname" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+        <Label fx:id="nachnameLabel" text="Nachname" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+        <TextField fx:id="nachname" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+        <Button fx:id="addNutzerButton" text="Neuen Nutzer erstellen" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+    </GridPane>
+
+</AnchorPane>

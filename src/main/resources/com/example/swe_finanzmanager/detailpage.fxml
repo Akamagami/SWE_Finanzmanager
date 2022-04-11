@@ -6,7 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<?import com.example.swe_finanzmanager.frontend.controller.AddTransaktionButton?>
+<?import com.example.swe_finanzmanager.frontend.buttons.AddTransaktionButton?>
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml">
 
