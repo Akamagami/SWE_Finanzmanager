@@ -27,13 +27,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MasterdetailController implements Observable, Listener, Controller {
+public class MasterdetailController implements Controller {
 
     private Nutzer currentNutzer;
     private UIUtils uiUtils;
     private Stage stage;
     private List<Listener> listenerList = new ArrayList<>();
-    private DetailpageController detailpageController;
+    private Controller detailpageController;
 
     @FXML
     AnchorPane masterdetailAP;
@@ -143,6 +143,11 @@ public class MasterdetailController implements Observable, Listener, Controller 
 
     public void setCurrentNutzer(Nutzer currentNutzer) {
         this.currentNutzer = currentNutzer;
+    }
+
+    @Override
+    public void setCurrentKonto(Konto currentKonto) {
+
     }
 
     public UIUtils getUiUtils() {

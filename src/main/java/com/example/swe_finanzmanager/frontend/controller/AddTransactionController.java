@@ -20,7 +20,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AddTransactionController implements Observable, Listener, Controller {
+public class AddTransactionController implements Controller {
 
     private UIUtils uiUtils;
     private Nutzer currentNutzer;
@@ -32,7 +32,6 @@ public class AddTransactionController implements Observable, Listener, Controlle
 
     @FXML
     TextField titel, betrag, beschreibung;
-
 
     @FXML
     Button addNewTransaktionButton;

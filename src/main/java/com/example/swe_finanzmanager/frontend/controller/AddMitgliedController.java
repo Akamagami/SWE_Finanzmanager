@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AddMitgliedController implements Controller, Listener, Observable{
+public class AddMitgliedController implements Controller {
 
     private List<Listener> listenerList = new ArrayList<>();
     private UIUtils uiUtils;
@@ -70,6 +70,11 @@ public class AddMitgliedController implements Controller, Listener, Observable{
     @Override
     public void addUIUtils(UIUtils uiUtils) {
         this.uiUtils = uiUtils;
+    }
+
+    @Override
+    public void setCurrentNutzer(Nutzer currentNutzer) {
+
     }
 
     @Override

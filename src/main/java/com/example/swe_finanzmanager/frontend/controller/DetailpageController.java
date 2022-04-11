@@ -32,8 +32,8 @@ import java.util.List;
 
 public class DetailpageController implements com.example.swe_finanzmanager.frontend.controller.Observable, Listener, Controller {
 
-    AddMitgliedButton addMitgliedButton;
-    AddTransaktionButton addTransaktionButton;
+    Button addMitgliedButton;
+    Button addTransaktionButton;
 
 
     @FXML
@@ -51,8 +51,8 @@ public class DetailpageController implements com.example.swe_finanzmanager.front
     private List<Listener> listenerList = new ArrayList<>();
     private List<Label> labelList = Arrays.asList(kontoname, kontostand, ersteller, id);
     private UIUtils uiUtils;
-    private AddTransactionController addTransactionController;
-    private AddMitgliedController addMitgliedController;
+    private Controller addTransactionController;
+    private Controller addMitgliedController;
 
     @Override
     public void build() throws IOException{
