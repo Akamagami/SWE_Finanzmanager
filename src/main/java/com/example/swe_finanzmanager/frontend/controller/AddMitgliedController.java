@@ -58,6 +58,7 @@ public class AddMitgliedController implements Controller {
                 currentKonto.addMitglied((Nutzer) mitgliederAuswahl.getSelectionModel().getSelectedItem());
                 try {
                     notifyListeners();
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
