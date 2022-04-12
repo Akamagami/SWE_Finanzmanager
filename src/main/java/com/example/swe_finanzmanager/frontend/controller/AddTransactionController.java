@@ -54,7 +54,7 @@ public class AddTransactionController implements Controller {
                 try {
                     uiUtils.createTransaktion(new BigDecimal(betrag.getText()), Date.valueOf(LocalDate.now()), currentNutzer, currentKonto, beschreibung.getText(), titel.getText());
                     notifyListeners();
-                    System.out.println("Listeners notified!");
+
                 } catch (Exception e) {
                     e.printStackTrace();
                     Alert alert = new Alert(Alert.AlertType.ERROR);

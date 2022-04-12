@@ -1,6 +1,8 @@
 package com.example.swe_finanzmanager.frontend.controller;
 
+import com.example.swe_finanzmanager.MainApplication;
 import com.example.swe_finanzmanager.backend.konten.Konto;
+import com.example.swe_finanzmanager.backend.konten.Transaktion;
 import com.example.swe_finanzmanager.backend.nutzer.Nutzer;
 import com.example.swe_finanzmanager.backend.speicher.UIUtils;
 import com.example.swe_finanzmanager.frontend.buttons.AddMitgliedButton;
@@ -9,13 +11,19 @@ import com.example.swe_finanzmanager.frontend.cellfactories.MitgliederCellFactor
 import com.example.swe_finanzmanager.frontend.cellfactories.TransaktionCellFactory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -26,6 +34,7 @@ public class DetailpageController implements Controller {
 
     Button addMitgliedButton;
     Button addTransaktionButton;
+    DetailTransactionController detailTransactionController;
 
     @FXML
     GridPane gridPane, infoPane, transaktionsPane, mitgliederPane;
@@ -48,6 +57,7 @@ public class DetailpageController implements Controller {
     @Override
     public void build() throws IOException{
         try {
+            detailTransactionController = new DetailTransactionController();
             addTransactionController = new AddTransactionController();
             addTransactionController.addListener(this);
             addTransactionController.addUIUtils(uiUtils);
@@ -68,13 +78,32 @@ public class DetailpageController implements Controller {
             beschreibungLabel.setPadding(new Insets(5));
             beschreibung.setPadding(new Insets(5));
             beschreibung.setText(currentKonto.getBeschreibung());
-            System.out.println(currentKonto.getKontostand());
-
 
 
             transaktionListView.setPadding(new Insets(5));
             transaktionListView.setCellFactory(new TransaktionCellFactory());
             transaktionListView.setItems(FXCollections.observableList(currentKonto.gettList()));
+            transaktionListView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    Transaktion selectedTransaction = (Transaktion) transaktionListView.getSelectionModel().getSelectedItem();
+                    detailTransactionController.setTransaktion(selectedTransaction);
+                    FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource("detailTransaction.fxml"));
+                    try {
+                        loader.setController(detailTransactionController);
+                        Parent newRoot = (Parent) loader.load();
+                        detailTransactionController.build();
+                        Stage stage = new Stage();
+                        stage.setTitle(selectedTransaction.getTitel());
+                        stage.setScene(new Scene(newRoot));
+                        stage.setResizable(false);
+                        stage.show();
+
+                    } catch (Exception e) {
+                        System.out.println(e);
+                    }
+                }
+            });
             addTransaktionButton.setPadding(new Insets(5));
             transaktionListView.refresh();
 
