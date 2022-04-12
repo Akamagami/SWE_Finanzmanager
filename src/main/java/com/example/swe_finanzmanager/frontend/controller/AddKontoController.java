@@ -62,6 +62,7 @@ public class AddKontoController implements Controller {
                 }
                 Stage stage = (Stage) addKontoButton.getScene().getWindow();
                 stage.close();
+                uiUtils.save();
             }
         });
 

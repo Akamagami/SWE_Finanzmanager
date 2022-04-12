@@ -63,6 +63,7 @@ public class AddMitgliedController implements Controller {
                 }
                 Stage stage = (Stage) addNewMitgliedButton.getScene().getWindow();
                 stage.close();
+                uiUtils.save();
             }
         });
     }

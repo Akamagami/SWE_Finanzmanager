@@ -63,6 +63,7 @@ public class AddTransactionController implements Controller {
                 }
                 Stage stage = (Stage) addNewTransaktionButton.getScene().getWindow();
                 stage.close();
+                uiUtils.save();
             }
         });
     }

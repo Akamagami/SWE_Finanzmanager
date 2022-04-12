@@ -27,11 +27,11 @@ public class TransaktionCellFactory implements Callback<ListView<Transaktion>, L
                     setText(null);
                 } else {
                     setText(transaktion.getBetrag() + " - " + transaktion.getTitel() + " - " + transaktion.getDatum());
-                    if (transaktion.getBetrag().compareTo(BigDecimal.ZERO) < 0) {
+                    /*if (transaktion.getBetrag().compareTo(BigDecimal.ZERO) < 0) {
                         setStyle("-fx-control-inner-background: " + NEGATIVE_TRANSACTION + ";");
                     } else {
                         setStyle("-fx-control-inner-background: " + POSITIVE_TRANSACTION + ";");
-                    }
+                    }*/
                 }
 
                 setOnMouseClicked((MouseEvent event) -> {

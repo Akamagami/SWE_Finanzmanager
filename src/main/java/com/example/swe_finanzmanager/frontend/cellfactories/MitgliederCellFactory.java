@@ -1,12 +1,12 @@
 package com.example.swe_finanzmanager.frontend.cellfactories;
 
+import com.example.swe_finanzmanager.backend.konten.Konto;
 import com.example.swe_finanzmanager.backend.nutzer.Nutzer;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 
-import java.util.List;
 
 public class MitgliederCellFactory implements Callback<ListView<Nutzer>, ListCell<Nutzer>> {
     @Override

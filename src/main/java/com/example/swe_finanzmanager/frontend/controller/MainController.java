@@ -46,6 +46,7 @@ public class MainController {
 
         Stage stage = (Stage) root.getScene().getWindow();
         stage.setScene(masterDetailScene);
+        stage.setResizable(false);
         stage.show();
 
         Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();

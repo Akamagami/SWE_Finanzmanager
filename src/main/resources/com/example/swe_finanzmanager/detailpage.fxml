@@ -12,14 +12,11 @@
 
     <GridPane fx:id="gridPane">
         <GridPane fx:id="infoPane" GridPane.rowIndex="0" GridPane.columnIndex="0">
-            <Label fx:id="kontonameLabel" text="Kontoname" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
-            <Label fx:id="kontoname" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
-            <Label fx:id="kontostandLabel" text="Kontostand" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-            <Label fx:id="kontostand" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-            <Label fx:id="erstellerLabel" text="Ersteller" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
-            <Label fx:id="ersteller" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
-            <Label fx:id="idLabel" text="ID" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
-            <Label fx:id="id" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+            <Label fx:id="kontostandLabel" text="Kontostand" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+            <Label fx:id="kontostand" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+            <Label fx:id="beschreibungLabel" text="Beschreibung" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+            <Label fx:id="beschreibung" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
         </GridPane>
         <GridPane fx:id="transaktionsPane" GridPane.columnIndex="1" GridPane.rowIndex="0">
             <Label fx:id="transaktionsLabel" text="Transaktionen" GridPane.rowIndex="0" GridPane.columnIndex="0"/>

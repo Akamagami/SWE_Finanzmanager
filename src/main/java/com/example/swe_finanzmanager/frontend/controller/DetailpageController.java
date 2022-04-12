@@ -31,7 +31,7 @@ public class DetailpageController implements Controller {
     GridPane gridPane, infoPane, transaktionsPane, mitgliederPane;
 
     @FXML
-    Label kontoname, kontostand, ersteller, id;
+    Label kontostand, kontostandLabel, beschreibung, beschreibungLabel;
 
     @FXML
     ListView transaktionListView, mitgliederListView;
@@ -40,7 +40,7 @@ public class DetailpageController implements Controller {
     private Konto currentKonto;
     private Nutzer currentNutzer;
     private List<Listener> listenerList = new ArrayList<>();
-    private List<Label> labelList = Arrays.asList(kontoname, kontostand, ersteller, id);
+    private List<Label> labelList = Arrays.asList(kontostand);
     private UIUtils uiUtils;
     private Controller addTransactionController;
     private Controller addMitgliedController;
@@ -62,14 +62,14 @@ public class DetailpageController implements Controller {
             addMitgliedButton = new AddMitgliedButton(addMitgliedController);
             mitgliederPane.add(addMitgliedButton, 0, 2);
 
-            kontoname.setText(currentKonto.getName());
-            kontostand.setText(currentKonto.getKontostand().toString());
-            ersteller.setText(currentKonto.getErsteller().getName().fullName());
-            id.setText(currentKonto.getId());
-            kontoname.setPadding(new Insets(5));
+            kontostandLabel.setPadding(new Insets(5));
             kontostand.setPadding(new Insets(5));
-            ersteller.setPadding(new Insets(5));
-            id.setPadding(new Insets(5));
+            kontostand.setText(currentKonto.getKontostand().toString());
+            beschreibungLabel.setPadding(new Insets(5));
+            beschreibung.setPadding(new Insets(5));
+            beschreibung.setText(currentKonto.getBeschreibung());
+            System.out.println(currentKonto.getKontostand());
+
 
 
             transaktionListView.setPadding(new Insets(5));

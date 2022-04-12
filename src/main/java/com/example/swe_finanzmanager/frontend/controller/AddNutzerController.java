@@ -55,6 +55,7 @@ public class AddNutzerController implements Controller {
                 }
                 Stage stage = (Stage) addNutzerButton.getScene().getWindow();
                 stage.close();
+                uiUtils.save();
             }
         });
     }
