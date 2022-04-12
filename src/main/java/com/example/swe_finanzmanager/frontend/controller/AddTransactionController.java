@@ -17,6 +17,7 @@ import java.math.BigDecimal;
 import java.sql.Date;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,7 +52,7 @@ public class AddTransactionController implements Controller {
             @Override
             public void handle(ActionEvent actionEvent) {
                 try {
-                    uiUtils.createTransaktion(new BigDecimal(betrag.getText()), new Date(System.currentTimeMillis()), currentNutzer, currentKonto, beschreibung.getText(), titel.getText());
+                    uiUtils.createTransaktion(new BigDecimal(betrag.getText()), Date.valueOf(LocalDate.now()), currentNutzer, currentKonto, beschreibung.getText(), titel.getText());
                     notifyListeners();
                     System.out.println("Listeners notified!");
                 } catch (Exception e) {
