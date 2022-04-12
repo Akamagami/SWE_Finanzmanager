@@ -160,7 +160,10 @@ public class XMLReader {
 		String[] nutzerList = strg.split(",");
 
 		for (String s : nutzerList) {
-			ret.add((Transaktion) sp.getObject(ClassType.TRANSAKTION, s));
+			if(!s.equals("")) {
+				ret.add((Transaktion) sp.getObject(ClassType.TRANSAKTION, s));
+			}
+			
 		}
 		return ret;
 	}
