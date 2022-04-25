@@ -65,7 +65,7 @@ public class MasterdetailController implements Controller {
         addNutzerController.addUIUtils(uiUtils);
         addNutzerController.addListener(this);
         addNutzerButton = new AddNutzerButton(addNutzerController);
-        AnchorPane.setLeftAnchor(addNutzerButton, 125.0);
+        AnchorPane.setLeftAnchor(addNutzerButton, 145.0);
         AnchorPane.setTopAnchor(addNutzerButton, 275.0);
         masterdetailAP.getChildren().add(addNutzerButton);
 
